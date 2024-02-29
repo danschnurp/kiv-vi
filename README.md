@@ -1,2 +1,3 @@
-# kiv-vi
-Mapping the Dropout and Retention Rates of Informatics Studies in European Countries
+# Mapping the Dropout and Retention Rates in Informatics Studies in European Countries
+
+
