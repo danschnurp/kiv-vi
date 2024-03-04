@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es5",                             // Set target JavaScript version
+    "module": "esnext",                          // Set module type
+    "strict": true,                               // Enable strict mode
+    "outDir": "static/js/compiled",               // Output directory for compiled JS
+    "rootDir": "static/js/src",                   // Root directory for TypeScript source
+    "allowJs": true,                             // Allow compilation of existing JavaScript files
+    "sourceMap": true                             // Generate source maps for debugging
+  }
+}
