@@ -1,0 +1,62 @@
+{
+  "definitions": {
+    "Year": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+
+        },
+        "male": {
+          "type": "number"
+
+        },
+        "year": {
+          "type": "number"
+
+        },
+        "female": {
+          "type": "number"
+
+        }
+      },
+      "required": ["year", "total", "male", "female"]
+    },
+    "Country": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "years": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Year"
+          }
+        }
+      },
+      "required": ["name", "years"]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "patternProperties": {
+        "^($|RU|UAS)": {
+          "type": "object",
+          "properties": {
+            "countries": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Country"
+              }
+            }
+          },
+          "required": ["countries"]
+        }
+      }
+    }
+  ]
+}

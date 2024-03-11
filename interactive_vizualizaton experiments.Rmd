@@ -1,8 +1,6 @@
 ```{r}
 library(readxl)
-suppressPackageStartupMessages(library(widgetframe))
-suppressPackageStartupMessages(library(leaflet))
-suppressPackageStartupMessages(library(leaflet.extras))
+
 
 
 Bachelor_Data_Retention_Graduation <- read_excel("./data/Bachelor-Data-Retention-Graduation.xlsx",
@@ -18,6 +16,10 @@ some_data <- as.data.frame(sapply(research_uni[-1][2], as.numeric))
 r <- research_uni[1]
 
 barplot(some_data$`2010/11`, names.arg = r$COUNTRY, horiz = TRUE)
+
+suppressPackageStartupMessages(library(widgetframe))
+suppressPackageStartupMessages(library(leaflet))
+suppressPackageStartupMessages(library(leaflet.extras))
 
 # todo
 
