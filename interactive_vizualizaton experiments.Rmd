@@ -1,0 +1,62 @@
+```{r}
+library(readxl)
+suppressPackageStartupMessages(library(widgetframe))
+suppressPackageStartupMessages(library(leaflet))
+suppressPackageStartupMessages(library(leaflet.extras))
+
+
+Bachelor_Data_Retention_Graduation <- read_excel("./data/Bachelor-Data-Retention-Graduation.xlsx",
+                                                 sheet = "Retention-Rate model1", na = "\"\"",
+                                                 skip = 1, )
+
+
+
+research_uni <- Bachelor_Data_Retention_Graduation[Bachelor_Data_Retention_Graduation[2]== "(RU)",]
+
+some_data <- as.data.frame(sapply(research_uni[-1][2], as.numeric))
+
+r <- research_uni[1]
+
+barplot(some_data$`2010/11`, names.arg = r$COUNTRY, horiz = TRUE)
+
+# todo
+
+# library(ggplot2)
+# library(ggiraph)
+#
+#
+#
+# p1 <- ggplot(some_data$`2010/11`,
+#        aes(y = r$COUNTRY,
+#            x=lifeExp,
+#            tooltip = lifeExp,
+#            data_id = country)) +
+#   geom_bar_interactive(stat="identity",
+#                        fill="steelblue") +
+#   labs(y="", x="1982") +
+#   theme_minimal()
+#
+# p1
+
+
+
+#
+# l <- leaflet() %>%
+#   addProviderTiles(providers$Esri.OceanBasemap)
+#
+# names(quakes.df) %>%
+#   purrr::walk( function(df) {
+#     l <<- l %>%
+#       addMarkers(data=quakes.df[[df]], lng=~long, lat=~lat,
+#                  label=~as.character(mag), popup=~as.character(mag),
+#                  group = df,
+#                  clusterOptions = markerClusterOptions())
+#   })
+#
+# l <- l %>%
+#   addLayersControl(
+#     overlayGroups = names(quakes.df),
+#     options = layersControlOptions(collapsed = FALSE)) %>%
+#   addMiniMap(tiles = providers$Esri.OceanBasemap, width = 120, height=80)
+# l
+```
