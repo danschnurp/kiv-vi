@@ -1,62 +1,29 @@
 {
-  "definitions": {
-    "Year": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "number"
-
-        },
-        "male": {
-          "type": "number"
-
-        },
-        "year": {
-          "type": "number"
-
-        },
-        "female": {
-          "type": "number"
-
-        }
-      },
-      "required": ["year", "total", "male", "female"]
-    },
-    "Country": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "minLength": 1
-        },
-        "years": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Year"
-          }
-        }
-      },
-      "required": ["name", "years"]
-    }
-  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "allOf": [
-    {
+  "properties": {
+    "retention": {
       "type": "object",
-      "patternProperties": {
-        "^($|RU|UAS)": {
+      "properties": {
+        "study level": {
           "type": "object",
-          "properties": {
-            "countries": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Country"
+          "patternProperties": {
+            "^(RU|UAS|RU \\+ UAS)$": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "years": { "type": "array", "items": { "type": "string" } },
+                  "total": { "type": "array", "items": { "type": "number" } },
+                  "female": { "type": "array", "items": { "type": "number" } },
+                  "male": { "type": "array", "items": { "type": "number" } }
+                },
+                "required": ["years", "total", "female", "male"]
               }
             }
-          },
-          "required": ["countries"]
+          }
         }
       }
     }
-  ]
+  }
 }
