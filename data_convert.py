@@ -1,6 +1,8 @@
 import pandas as pd
 import json
 
+import geopandas as gpd
+
 from jsonschema.validators import validate
 
 xls = pd.ExcelFile("./data/Bachelor-Data-Retention-Graduation.xlsx")
@@ -32,16 +34,70 @@ def generate_json(dataframe):
         else:
             raise AttributeError("Duplicated country...")
 
-
     return json_data
 
 
-data = {"retention": {"batchelor": {"RU": generate_json(research_universities),
-                                    "UAS": generate_json(universities_applied_sciences),
-                                    "RU + UAS": generate_json(both_types)}}}
+research_universities = generate_json(research_universities)
+universities_applied_sciences = generate_json(universities_applied_sciences)
+both_types = generate_json(both_types)
+
+data = {"retention": {"batchelor": {"RU": research_universities,
+                                    "UAS": universities_applied_sciences,
+                                    "RU + UAS": both_types}}}
 
 with open('./data/data.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
+
+countries = set(list(both_types.keys()) +
+                list(universities_applied_sciences.keys()) +
+                list(research_universities.keys()))
+
+countries = list(countries)
+
+print(countries)
+
+
+countries.append("Czechia")
+countries.append("United Kingdom")
+
+
+# Load world map
+world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+
+print(list(world[(world['continent'] == 'Europe')]["name"]))
+
+# Filter Europe
+europe = world[(world['continent'] == 'Europe') & (world['name'] != 'Russia')]
+
+# Select relevant columns
+europe = europe[['name', 'geometry']]
+
+# Convert to GeoJSON
+europe_geojson = europe.to_json()
+
+
+with open('./data/europe_geo.json', 'w', encoding='utf-8') as f:
+    f.writelines(europe_geojson)
+
+
+# ################################
+
+
+# Filter Europe
+europe = world[(world['continent'] == 'Europe') & (world['name'].isin(countries))]
+
+# Select relevant columns
+europe = europe[['name', 'geometry']]
+
+# Convert to GeoJSON
+europe_geojson = europe.to_json()
+
+
+with open('./data/europe_geo_filtered.json', 'w', encoding='utf-8') as f:
+    f.writelines(europe_geojson)
+
+################################
+
 
 schema = json.load(open("data_schema.json"))
 validate(instance=data, schema=schema)
