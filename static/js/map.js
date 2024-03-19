@@ -1,10 +1,13 @@
 
-var yourVlSpec = {
+var pict_width = 600;
+var pict_height = 500;
+
+var VlSpec = {
 
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "An interactive map of Europe supporting pan and zoom.",
-  "width": 600,
-  "height": 300,
+  "width": pict_width,
+  "height": pict_height,
 
 
 
@@ -14,7 +17,7 @@ var yourVlSpec = {
 
     {
       "name": "scale",
-      "value": 100,
+      "value": 350,
       "on": [{
         "events": {"type": "wheel", "consume": true},
         "update": "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)"
@@ -66,13 +69,16 @@ var yourVlSpec = {
       }]
     },
     {
-      "name": "centerY", "value": 0,
+      "name": "centerY", "value": 55,
       "on": [{
         "events": {"signal": "delta"},
         "update": "clamp(angles[1] + delta[1], -60, 60)"
       }]
     }
   ],
+
+    "type": "geoshape",
+  "projection": "projection",
 
   "projections": [
     {
@@ -81,53 +87,47 @@ var yourVlSpec = {
 
       "scale": {"signal": "scale"},
       "rotate": [{"signal": "rotateX"}, 0, 0],
-      "center": [10, {"signal": "centerY"}],
+       "center": [10, {"signal": "centerY"}],
+      "clipExtent": [[0, 0], [pict_width, pict_height]],
       "translate": [{"signal": "tx"}, {"signal": "ty"}]
     }
   ],
 
   "data": [
     {
-      "name": "europe",
-      "url": "./data/europe_geo.json",
-      "format": {
-        "type": "topojson",
-        "feature": "countries"
-      }
+      "name": "retention",
+      "url": "./data/data.json",
+
     },
        {
       "name": "europe_uni",
-      "url": "./data/europe_geo_filtered.json",
+      "url": "https://raw.githubusercontent.com/leakyMirror/map-of-europe/27a335110674ae5b01a84d3501b227e661beea2b/TopoJSON/europe.topojson",
       "format": {
         "type": "topojson",
-        "feature": "countries"
-      }
+        "feature": "europe"
+      },
     }
   ],
 
   "marks": [
 
-    {
-      "type": "shape",
-      "from": {"data": "europe"},
-      "encode": {
-        "enter": {
-          "strokeWidth": {"value": 0.5},
-          "stroke": {"value": "white"},
-          "fill": {"value": "lightgray"}
-        }
-      },
-      "transform": [
-        { "type": "geoshape", "projection": "projection" }
-      ]
-    }  ,  {
+
+     {
       "type": "shape",
       "from": {"data": "europe_uni"},
       "encode": {
-        "enter": {
-          "strokeWidth": {"value": 0.5},
-          "stroke": {"value": "white"},
-          "fill": {"value": "lightblue"}
+
+        "update": {
+            "stroke": {"value": "white"},
+          "fill": {"value": "lightblue"},
+          "cursor": {"value": "pointer"}
+        },
+        "hover": {
+          "tooltip": {
+            "signal": "{'retention': datum.properties.NAME}"
+          },
+           "fill": {"value": "darkgreen"},
+
         }
       },
       "transform": [
@@ -138,4 +138,4 @@ var yourVlSpec = {
 
 
       };
-      vegaEmbed('#vis', yourVlSpec);
+      vegaEmbed('#vis', VlSpec);

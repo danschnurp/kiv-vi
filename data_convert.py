@@ -57,47 +57,5 @@ countries = list(countries)
 print(countries)
 
 
-countries.append("Czechia")
-countries.append("United Kingdom")
-
-
-# Load world map
-world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-
-print(list(world[(world['continent'] == 'Europe')]["name"]))
-
-# Filter Europe
-europe = world[(world['continent'] == 'Europe') & (world['name'] != 'Russia')]
-
-# Select relevant columns
-europe = europe[['name', 'geometry']]
-
-# Convert to GeoJSON
-europe_geojson = europe.to_json()
-
-
-with open('./data/europe_geo.json', 'w', encoding='utf-8') as f:
-    f.writelines(europe_geojson)
-
-
-# ################################
-
-
-# Filter Europe
-europe = world[(world['continent'] == 'Europe') & (world['name'].isin(countries))]
-
-# Select relevant columns
-europe = europe[['name', 'geometry']]
-
-# Convert to GeoJSON
-europe_geojson = europe.to_json()
-
-
-with open('./data/europe_geo_filtered.json', 'w', encoding='utf-8') as f:
-    f.writelines(europe_geojson)
-
-################################
-
-
 schema = json.load(open("data_schema.json"))
 validate(instance=data, schema=schema)
