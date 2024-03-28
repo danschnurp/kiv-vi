@@ -105,7 +105,7 @@ var VlSpec = {
     },
        {
       "name": "europe_uni",
-      "url": "https://raw.githubusercontent.com/leakyMirror/map-of-europe/27a335110674ae5b01a84d3501b227e661beea2b/TopoJSON/europe.topojson",
+      "values": europe_geo,
       "format": {
         "type": "topojson",
         "feature": "europe"
