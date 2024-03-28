@@ -1,13 +1,4 @@
-var textvis = 
-
-{
-  "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "width": 800,
-  "height": 200,
-  "padding": 5,
-
-  "data": [
-    {
+var current_data =  {
       "name": "germany_ru",
       "values": [
         {
@@ -78,7 +69,24 @@ var textvis =
   },
 
       ]
-    }
+    };
+
+var data_min = Math.min(...current_data.values.map(item => item.total)) - 0.001;
+
+
+
+var textvis =
+
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 800,
+  "height": 200,
+  "padding": 5,
+
+  "title": "Retention in " + current_data.name + " across years in %",
+
+  "data": [
+   current_data
   ],
 
 
@@ -86,16 +94,17 @@ var textvis =
     {
       "name": "xscale",
       "type": "band",
-      "domain": {"data": "germany_ru", "field": "year"},
+      "domain": {"data": current_data.name, "field": "year"},
       "range": "width",
-      "padding": 0.05,
+      "padding": 0.45,
       "round": true
     },
     {
       "name": "yscale",
-      "domain": {"data": "germany_ru", "field": "total"},
+      "domain": {"data": current_data.name, "field": "total"},
       "nice": true,
-      "range": "height"
+      "range": "height",
+      "domainMin": data_min
     }
   ],
 
@@ -107,16 +116,17 @@ var textvis =
   "marks": [
     {
       "type": "rect",
-      "from": {"data":"germany_ru"},
+      "from": {"data":current_data.name},
       "encode": {
         "enter": {
           "x": {"scale": "xscale", "field": "year"},
           "width": {"scale": "xscale", "band": 1},
           "y": {"scale": "yscale", "field": "total"},
-          "y2": {"scale": "yscale", "value": 0}
+          "y2": {"scale": "yscale", "value": data_min}
         },
         "update": {
-          "fill": {"value": "steelblue"}
+          "fill": {"value": "steelblue"},
+          "tooltip": {"field": "total", "type": "quantitative"}
         },
       }
     },
