@@ -1,4 +1,6 @@
 pandas
 jsonschema
 openpyxl
+altair
+
 geopandas

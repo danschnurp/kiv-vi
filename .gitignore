@@ -161,3 +161,4 @@ cython_debug/
 /data/
 .Rproj.user
 .idea
+/static/js/generated_map.js

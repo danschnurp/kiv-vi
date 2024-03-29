@@ -1,10 +1,32 @@
 
-var retention_data = {};
+var institution_type = document.getElementById("institution_type").value;
+
+document.getElementById("institution_type").addEventListener("change", function() {
+
+institution_type = this.value;
+console.log(institution_type);
+show_map();
+
+});
+
+function show_map() {
+
+var retention_countries = Object.keys(retention_data.bachelor[institution_type]);
+var europe_uni_filtered = structuredClone(europe_geo);
+
+/* filtering the geometries of European countries in the `europe_uni_filtered` object based on whether
+the country name is included in the `retention_countries` array. */
+europe_uni_filtered.objects.europe.geometries = europe_uni_filtered.objects.europe.geometries.filter(geometry => {
+    const countryName = geometry.properties.NAME;
+    return retention_countries.includes(countryName);
+});
+
+
 
 var pict_width = 600;
 var pict_height = 500;
 
-var VlSpec = {
+var VSpec = {
 
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "An interactive map of Europe supporting pan and zoom.",
@@ -96,13 +118,6 @@ var VlSpec = {
   ],
 
   "data": [
-    {
-      "name": "retention",
-      retention_data,
-      "transform": [
-      {"type": "flatten", "fields": ["retention_data.retention.bachelor.RU", "retention_data.retention.bachelor.UAS", "retention_data.retention.bachelor.BOTH"]}
-      ]
-    },
        {
       "name": "europe_uni",
       "values": europe_geo,
@@ -113,33 +128,35 @@ var VlSpec = {
     },
     {
       "name": "europe_uni_filtered",
-      "source": "europe_uni",
-      "transform": [
-        {"type": "filter", "expr": "datum.id !== 'RU'"}
-      ]
+      "values": europe_uni_filtered,
+            "format": {
+        "type": "topojson",
+        "feature": "europe"
+      },
     },
-    // {
-    //   "name": "retention_countries",
-    //   "source": "filtered",
-    //   "transform": [
-    //     {
-    //       "type": "lookup",
-    //       "from": "retention",
-    //       "key": "country_id", // Key to match in additionalData
-    //       "fields": "id", // Field in 'filtered' data to match with 'country_id' in additionalData
-    //       "as": "additionalInfo"
-    //     },
-    //     {"type": "filter", "expr": "datum.additionalInfo !== null"} // Filter out if additional info is missing
-    //   ]
-    // }
 
 
   ],
 
   "marks": [
 
+         {
+      "type": "shape",
+      "from": {"data": "europe_uni"},
+      "encode": {
 
-     {
+        "update": {
+            "stroke": {"value": "white"},
+          "fill": {"value": "lightgray"},
+
+        },
+
+      },
+      "transform": [
+        { "type": "geoshape", "projection": "projection" }
+      ]
+    },
+        {
       "type": "shape",
       "from": {"data": "europe_uni_filtered"},
       "encode": {
@@ -151,34 +168,27 @@ var VlSpec = {
         },
         "hover": {
           "tooltip": {
-            "signal": "{'retention': datum.properties.NAME}"
+            "signal": "{'Name': datum.properties.NAME}"
           },
-           "fill": {"value": "darkgreen"},
+           "fill": {"value": "darkblue"},
 
         }
       },
       "transform": [
         { "type": "geoshape", "projection": "projection" }
       ]
-    }
-
-    ,  {
-      "type": "text",
-      "from": {"data": "retention"},
-      "encode": {
-        "enter": {
-          "text": {"field": "datum.country"},
-          "x": {"field": {"group": "width"}, "mult": 0.5},
-          "y": {"field": {"group": "height"}, "mult": 0.5},
-          "align": {"value": "center"},
-          "baseline": {"value": "middle"},
-          "fill": {"value": "black"}
-        }
-      }
-    }
+    },
 
   ]
 
 
       };
-      vegaEmbed('#vis', VlSpec);
+      vegaEmbed('#vis', VSpec);
+
+}
+
+var current_data =  { "name": "Germany", "values": retention_data.bachelor[institution_type].Germany};
+
+console.log(current_data);
+
+show_map();
