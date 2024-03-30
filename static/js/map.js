@@ -30,10 +30,10 @@ europe_uni_filtered.objects.europe.geometries = europe_uni_filtered.objects.euro
 
 for (let i = 0; i < europe_uni_filtered.objects.europe.geometries.length; i++) {
 
-var retention = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][0]["total"];
+var retention = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][0];
 
-if (retention > 1.0 ) retention = 0.99;
-if (retention === 0 ) retention = 0.5;
+if (retention.total > 1.0 ) retention.total = 0.99;
+if (retention.total === 0 ) retention.total = 0.5;
 console.log(retention);
 europe_uni_filtered.objects.europe.geometries[i].properties.DATA = retention;
 
@@ -189,12 +189,13 @@ var VSpec = {
             "stroke": {"value": "white"},
           "fill": {"value": "lightblue"},
           "cursor": {"value": "pointer"},
-          "opacity": {"signal":  "datum.properties.DATA"}
+          "opacity": {"signal":  "datum.properties.DATA.total"}
 
         },
         "hover": {
           "tooltip": {
-            "signal":  "datum.properties.DATA"
+            "signal":
+  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
           },
            "fill": {"value": "steelblue"},
         },
