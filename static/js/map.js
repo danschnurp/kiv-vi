@@ -1,14 +1,19 @@
 
 var institution_type = document.getElementById("institution_type").value;
+var current_data =  { "name": "Germany", "values": retention_data.bachelor[institution_type].Germany};
+var current_country = "Germany"
 
+/* event listener to the HTML element with the id "institution_type". */
 document.getElementById("institution_type").addEventListener("change", function() {
-
 institution_type = this.value;
 console.log(institution_type);
 show_map();
-
+current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type].Germany};
+console.log(current_data);
+show_bar(current_data);
 });
 
+/* displaying an interactive map of Europe */
 function show_map() {
 
 var retention_countries = Object.keys(retention_data.bachelor[institution_type]);
@@ -33,17 +38,22 @@ var VSpec = {
   "width": pict_width,
   "height": pict_height,
 
-
+     "title": "Interactive map",
 
   "signals": [
     { "name": "tx", "update": "width / 2" },
     { "name": "ty", "update": "height / 2" },
+
+//    todo on country click filling this value
+    {"name": "clickedData", "init": null},
 
     {
       "name": "scale",
       "value": 350,
       "on": [{
         "events": {"type": "wheel", "consume": true},
+        /* controlling the scaling behavior of the interactive
+        map in response to mouse wheel events (zooming in and out). */
         "update": "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)"
       }]
     },
@@ -93,6 +103,7 @@ var VSpec = {
       }]
     },
     {
+      /*  initial value of 55 pointing to europe */
       "name": "centerY", "value": 55,
       "on": [{
         "events": {"signal": "delta"},
@@ -111,6 +122,7 @@ var VSpec = {
 
       "scale": {"signal": "scale"},
       "rotate": [{"signal": "rotateX"}, 0, 0],
+       /*  initial values pointing to europe */
        "center": [10, {"signal": "centerY"}],
       "clipExtent": [[0, 0], [pict_width, pict_height]],
       "translate": [{"signal": "tx"}, {"signal": "ty"}]
@@ -170,9 +182,8 @@ var VSpec = {
           "tooltip": {
             "signal": "{'Name': datum.properties.NAME}"
           },
-           "fill": {"value": "darkblue"},
-
-        }
+           "fill": {"value": "steelblue"},
+        },
       },
       "transform": [
         { "type": "geoshape", "projection": "projection" }
@@ -187,8 +198,8 @@ var VSpec = {
 
 }
 
-var current_data =  { "name": "Germany", "values": retention_data.bachelor[institution_type].Germany};
 
-console.log(current_data);
+
+
 
 show_map();

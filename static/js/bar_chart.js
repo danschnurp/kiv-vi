@@ -1,19 +1,20 @@
 
 
-
+function show_bar(current_data) {
+/*  calculating the minimum value and adds delta to view min value */
 var data_min = Math.min(...current_data.values.map(item => item.total)) - 0.001;
 
-console.log(data_min);
 
 var textvis =
 
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "width": 800,
+  "width": 555,
   "height": 200,
-  "padding": 5,
+  "padding":1,
 
-  "title": "Retention in " + current_data.name + " across years in %",
+  "title": "Retention in " + current_data.name + " across years in % starting from minimum value",
+
 
   "data": [
    current_data
@@ -26,7 +27,7 @@ var textvis =
       "type": "band",
       "domain": {"data": current_data.name, "field": "year"},
       "range": "width",
-      "padding": 0.45,
+      "padding": 0.6,
       "round": true
     },
     {
@@ -75,3 +76,5 @@ var textvis =
 }
 
   vegaEmbed('#textvis', textvis);
+}
+show_bar(current_data);
