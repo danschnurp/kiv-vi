@@ -67,6 +67,12 @@ var retention_data = {
           "total": 0.8526055858,
           "male": 0.8600986278,
           "female": 0.8236754967
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Belgium": [
@@ -135,6 +141,12 @@ var retention_data = {
           "total": 0.8932008693,
           "male": 0.9057868737,
           "female": 0.8010335917
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Bulgaria": [
@@ -197,6 +209,18 @@ var retention_data = {
           "total": 0.8952292728,
           "male": 0.8927513841,
           "female": 0.9015852048
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Czech Republic": [
@@ -265,6 +289,12 @@ var retention_data = {
           "total": 0.7808731102,
           "male": 0.778638402,
           "female": 0.7920489297
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Denmark": [
@@ -333,6 +363,12 @@ var retention_data = {
           "total": 0.8521631644,
           "male": 0.8500631313,
           "female": 0.8597491448
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Estonia": [
@@ -401,6 +437,12 @@ var retention_data = {
           "total": 0.8592423253,
           "male": 0.8546292417,
           "female": 0.8755555556
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Finland": [
@@ -469,9 +511,33 @@ var retention_data = {
           "total": 0.9760497667,
           "male": 0.9660481642,
           "female": 1.013196481
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "France": [
+        {
+          "year": "2010/11",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 1.047408142,
+          "male": 0.0,
+          "female": 1.203868104
+        },
         {
           "year": "2013/14",
           "total": 1.043010753,
@@ -519,6 +585,12 @@ var retention_data = {
           "total": 1.044722996,
           "male": 1.007663523,
           "female": 1.275386622
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Germany": [
@@ -587,6 +659,12 @@ var retention_data = {
           "total": 0.865843097,
           "male": 0.876456696,
           "female": 0.8300391815
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Greece": [
@@ -615,10 +693,52 @@ var retention_data = {
           "female": 0.9455273698
         },
         {
+          "year": "2014/15",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
           "year": "2018/19",
           "total": 0.9035738104,
           "male": 0.9088666305,
           "female": 0.8830398162
+        },
+        {
+          "year": "2019/20",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Ireland": [
@@ -687,17 +807,113 @@ var retention_data = {
           "total": 0.9731400554,
           "male": 0.9615384615,
           "female": 1.022346369
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Italy": [
+        {
+          "year": "2010/11",
+          "total": 0.8893117018,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.8890937482,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.908650519,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2013/14",
+          "total": 0.9052708717,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2014/15",
+          "total": 0.8997945367,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.890686406,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.9054190306,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.9129383832,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2018/19",
           "total": 0.8978351898,
           "male": 0.9004251404,
           "female": 0.8815737052
+        },
+        {
+          "year": "2019/20",
+          "total": 0.8686203741,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.8431588209,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Latvia": [
+        {
+          "year": "2010/11",
+          "total": 0.8213634707,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.7873823632,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.8145261293,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2013/14",
+          "total": 0.7585052001,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2014/15",
           "total": 0.8260947919,
@@ -739,9 +955,33 @@ var retention_data = {
           "total": 0.7335324869,
           "male": 0.7313405797,
           "female": 0.7438297872
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Lithuania": [
+        {
+          "year": "2010/11",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2013/14",
           "total": 0.9791879904,
@@ -765,6 +1005,36 @@ var retention_data = {
           "total": 0.9223524487,
           "male": 0.9278425656,
           "female": 0.8882175227
+        },
+        {
+          "year": "2017/18",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2018/19",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2019/20",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Netherlands": [
@@ -833,6 +1103,12 @@ var retention_data = {
           "total": 0.9514922435,
           "male": 0.9468507848,
           "female": 0.9692366122
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Norway": [
@@ -901,9 +1177,88 @@ var retention_data = {
           "total": 0.9434315101,
           "male": 0.9365671642,
           "female": 0.9642184557
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
-      "Poland": [],
+      "Poland": [
+        {
+          "year": "2010/11",
+          "total": 0.8272218498,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.8590213886,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.8306431838,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2013/14",
+          "total": 0.8058210315,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2014/15",
+          "total": 0.8465848099,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.8494878076,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.8540591028,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.8302430731,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2018/19",
+          "total": 0.6994391504,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2019/20",
+          "total": 0.8617367769,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.8635471402,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        }
+      ],
       "Portugal": [
         {
           "year": "2010/11",
@@ -970,9 +1325,33 @@ var retention_data = {
           "total": 0.9054636452,
           "male": 0.9021189894,
           "female": 0.9248582231
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Romania": [
+        {
+          "year": "2010/11",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2013/14",
           "total": 0.9991130165,
@@ -1020,9 +1399,27 @@ var retention_data = {
           "total": 0.9555163993,
           "male": 0.9462408165,
           "female": 0.9774381368
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Spain": [
+        {
+          "year": "2010/11",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2012/13",
           "total": 0.8562497871,
@@ -1076,6 +1473,12 @@ var retention_data = {
           "total": 0.8911453724,
           "male": 0.8897821529,
           "female": 0.8989740369
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Switzerland": [
@@ -1144,6 +1547,12 @@ var retention_data = {
           "total": 0.934049829,
           "male": 0.9351879254,
           "female": 0.9286713287
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Turkey": [
@@ -1158,6 +1567,24 @@ var retention_data = {
           "total": 1.048740983,
           "male": 1.041500757,
           "female": 1.06355033
+        },
+        {
+          "year": "2012/13",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2013/14",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2014/15",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         },
         {
           "year": "2015/16",
@@ -1194,6 +1621,12 @@ var retention_data = {
           "total": 0.9665046429,
           "male": 0.9600009127,
           "female": 0.9858886735
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "United Kingdom": [
@@ -1262,6 +1695,12 @@ var retention_data = {
           "total": 0.8961834522,
           "male": 0.8923099588,
           "female": 0.9139132389
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ]
     },
@@ -1332,6 +1771,12 @@ var retention_data = {
           "total": 0.8707618668,
           "male": 0.8743874129,
           "female": 0.8583992964
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Belgium": [
@@ -1358,6 +1803,54 @@ var retention_data = {
           "total": 0.8148551331,
           "male": 0.8106440072,
           "female": 0.8766404199
+        },
+        {
+          "year": "2014/15",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2018/19",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2019/20",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Bulgaria": [
@@ -1420,6 +1913,18 @@ var retention_data = {
           "total": 0.8811013767,
           "male": 0.9082426128,
           "female": 0.7692307692
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Czech Republic": [
@@ -1488,6 +1993,12 @@ var retention_data = {
           "total": 0.8027314112,
           "male": 0.8069705094,
           "female": 0.7788944724
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Denmark": [
@@ -1514,6 +2025,54 @@ var retention_data = {
           "total": 0.9476190476,
           "male": 0.9441624365,
           "female": 1.0
+        },
+        {
+          "year": "2014/15",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2018/19",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2019/20",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Estonia": [
@@ -1582,6 +2141,12 @@ var retention_data = {
           "total": 0.8183183183,
           "male": 0.8489483748,
           "female": 0.7062937063
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Finland": [
@@ -1650,6 +2215,12 @@ var retention_data = {
           "total": 0.8993135011,
           "male": 0.8999085923,
           "female": 0.8973180077
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Germany": [
@@ -1718,6 +2289,12 @@ var retention_data = {
           "total": 0.9204492663,
           "male": 0.9238444776,
           "female": 0.9073442826
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Ireland": [
@@ -1786,9 +2363,33 @@ var retention_data = {
           "total": 0.8816591311,
           "male": 0.8624206709,
           "female": 1.007407407
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Lithuania": [
+        {
+          "year": "2010/11",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2013/14",
           "total": 0.8102564103,
@@ -1812,6 +2413,36 @@ var retention_data = {
           "total": 0.830557567,
           "male": 0.8307313065,
           "female": 0.8292682927
+        },
+        {
+          "year": "2017/18",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2018/19",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2019/20",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Netherlands": [
@@ -1880,6 +2511,12 @@ var retention_data = {
           "total": 0.9374058278,
           "male": 0.9312050927,
           "female": 0.9639057239
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Norway": [
@@ -1948,6 +2585,12 @@ var retention_data = {
           "total": 0.9594320487,
           "male": 0.9683698297,
           "female": 0.9146341463
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Portugal": [
@@ -2016,6 +2659,12 @@ var retention_data = {
           "total": 0.9110507077,
           "male": 0.9097752222,
           "female": 0.9221014493
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Switzerland": [
@@ -2084,6 +2733,12 @@ var retention_data = {
           "total": 0.8625538384,
           "male": 0.8537062096,
           "female": 0.9098954143
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ]
     },
@@ -2154,6 +2809,12 @@ var retention_data = {
           "total": 0.858037952,
           "male": 0.8642938281,
           "female": 0.8347875035
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Belgium": [
@@ -2180,6 +2841,54 @@ var retention_data = {
           "total": 0.8266809728,
           "male": 0.8220896436,
           "female": 0.8929359823
+        },
+        {
+          "year": "2014/15",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2018/19",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2019/20",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Bulgaria": [
@@ -2242,6 +2951,18 @@ var retention_data = {
           "total": 0.8942556495,
           "male": 0.8939357907,
           "female": 0.8951005025
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Czech Republic": [
@@ -2310,6 +3031,12 @@ var retention_data = {
           "total": 0.7820316899,
           "male": 0.7801668033,
           "female": 0.7914140189
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Denmark": [
@@ -2336,6 +3063,54 @@ var retention_data = {
           "total": 0.8365191147,
           "male": 0.8360128617,
           "female": 0.8396396396
+        },
+        {
+          "year": "2014/15",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2018/19",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2019/20",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Estonia": [
@@ -2404,6 +3179,12 @@ var retention_data = {
           "total": 0.8519313305,
           "male": 0.8536082474,
           "female": 0.8459657702
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Finland": [
@@ -2472,9 +3253,33 @@ var retention_data = {
           "total": 0.9270458633,
           "male": 0.9241568968,
           "female": 0.9370910921
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "France": [
+        {
+          "year": "2010/11",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 1.047408142,
+          "male": 0.0,
+          "female": 1.203868104
+        },
         {
           "year": "2013/14",
           "total": 1.043010753,
@@ -2522,6 +3327,12 @@ var retention_data = {
           "total": 1.044722996,
           "male": 1.007663523,
           "female": 1.275386622
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Germany": [
@@ -2590,6 +3401,12 @@ var retention_data = {
           "total": 0.8943568181,
           "male": 0.9015466641,
           "female": 0.8683684892
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Greece": [
@@ -2618,10 +3435,52 @@ var retention_data = {
           "female": 0.9455273698
         },
         {
+          "year": "2014/15",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
           "year": "2018/19",
           "total": 0.9035738104,
           "male": 0.9088666305,
           "female": 0.8830398162
+        },
+        {
+          "year": "2019/20",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Ireland": [
@@ -2690,17 +3549,113 @@ var retention_data = {
           "total": 0.9255471467,
           "male": 0.9082602339,
           "female": 1.015923567
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Italy": [
+        {
+          "year": "2010/11",
+          "total": 0.8893117018,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.8890937482,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.908650519,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2013/14",
+          "total": 0.9052708717,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2014/15",
+          "total": 0.8997945367,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.890686406,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.9054190306,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.9129383832,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2018/19",
           "total": 0.8978351898,
           "male": 0.9004251404,
           "female": 0.8815737052
+        },
+        {
+          "year": "2019/20",
+          "total": 0.8686203741,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.8431588209,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Latvia": [
+        {
+          "year": "2010/11",
+          "total": 0.8213634707,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.7873823632,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.8145261293,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2013/14",
+          "total": 0.7585052001,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2014/15",
           "total": 0.8260947919,
@@ -2742,9 +3697,33 @@ var retention_data = {
           "total": 0.7335324869,
           "male": 0.7313405797,
           "female": 0.7438297872
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Lithuania": [
+        {
+          "year": "2010/11",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2013/14",
           "total": 0.9436809485,
@@ -2768,6 +3747,36 @@ var retention_data = {
           "total": 0.9017697678,
           "male": 0.9056816051,
           "female": 0.8765133172
+        },
+        {
+          "year": "2017/18",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2018/19",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2019/20",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Netherlands": [
@@ -2836,6 +3845,12 @@ var retention_data = {
           "total": 0.9408554459,
           "male": 0.9349729652,
           "female": 0.9653012527
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Norway": [
@@ -2904,9 +3919,88 @@ var retention_data = {
           "total": 0.9464285714,
           "male": 0.9430411095,
           "female": 0.9575856444
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
-      "Poland": [],
+      "Poland": [
+        {
+          "year": "2010/11",
+          "total": 0.8272218498,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.8590213886,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.8306431838,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2013/14",
+          "total": 0.8058210315,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2014/15",
+          "total": 0.8465848099,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2015/16",
+          "total": 0.8494878076,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2016/17",
+          "total": 0.8540591028,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2017/18",
+          "total": 0.8302430731,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2018/19",
+          "total": 0.6994391504,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2019/20",
+          "total": 0.8617367769,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2020/21",
+          "total": 0.8635471402,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        }
+      ],
       "Portugal": [
         {
           "year": "2010/11",
@@ -2973,9 +4067,33 @@ var retention_data = {
           "total": 0.907842746,
           "male": 0.9054728647,
           "female": 0.9239130435
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Romania": [
+        {
+          "year": "2010/11",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2012/13",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2013/14",
           "total": 0.9991130165,
@@ -3023,9 +4141,27 @@ var retention_data = {
           "total": 0.9555163993,
           "male": 0.9462408165,
           "female": 0.9774381368
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Spain": [
+        {
+          "year": "2010/11",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2011/12",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
         {
           "year": "2012/13",
           "total": 0.8562497871,
@@ -3079,6 +4215,12 @@ var retention_data = {
           "total": 0.8911453724,
           "male": 0.8897821529,
           "female": 0.8989740369
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Switzerland": [
@@ -3147,6 +4289,12 @@ var retention_data = {
           "total": 0.8869703036,
           "male": 0.8811565304,
           "female": 0.9167517875
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "Turkey": [
@@ -3161,6 +4309,24 @@ var retention_data = {
           "total": 1.048740983,
           "male": 1.041500757,
           "female": 1.06355033
+        },
+        {
+          "year": "2012/13",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2013/14",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
+        },
+        {
+          "year": "2014/15",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         },
         {
           "year": "2015/16",
@@ -3197,6 +4363,12 @@ var retention_data = {
           "total": 0.9665046429,
           "male": 0.9600009127,
           "female": 0.9858886735
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ],
       "United Kingdom": [
@@ -3265,6 +4437,12 @@ var retention_data = {
           "total": 0.8961834522,
           "male": 0.8923099588,
           "female": 0.9139132389
+        },
+        {
+          "year": "2021/22",
+          "total": 0.0,
+          "male": 0.0,
+          "female": 0.0
         }
       ]
     }

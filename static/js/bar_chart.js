@@ -1,6 +1,13 @@
 
 
 function show_bar(current_data) {
+
+current_data.values = current_data.values.filter(item => {
+
+return item.total > 0 && item.total < 1
+
+});
+
 /*  calculating the minimum value and adds delta to view min value */
 var data_min = Math.min(...current_data.values.map(item => item.total)) - 0.001;
 

@@ -1,14 +1,15 @@
 
 var institution_type = document.getElementById("institution_type").value;
-var current_data =  { "name": "Germany", "values": retention_data.bachelor[institution_type].Germany};
-var current_country = "Germany"
+var current_country = "Czech Republic";
+var current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
+
 
 /* event listener to the HTML element with the id "institution_type". */
 document.getElementById("institution_type").addEventListener("change", function() {
 institution_type = this.value;
 console.log(institution_type);
 show_map();
-current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type].Germany};
+current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
 console.log(current_data);
 show_bar(current_data);
 });
@@ -27,6 +28,20 @@ europe_uni_filtered.objects.europe.geometries = europe_uni_filtered.objects.euro
 });
 
 
+for (let i = 0; i < europe_uni_filtered.objects.europe.geometries.length; i++) {
+
+var retention = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][0]["total"];
+
+if (retention > 1.0 ) retention = 0.99;
+if (retention === 0 ) retention = 0.5;
+console.log(retention);
+europe_uni_filtered.objects.europe.geometries[i].properties.DATA = retention;
+
+}
+
+
+
+console.log(europe_uni_filtered);
 
 var pict_width = 600;
 var pict_height = 500;
@@ -43,9 +58,6 @@ var VSpec = {
   "signals": [
     { "name": "tx", "update": "width / 2" },
     { "name": "ty", "update": "height / 2" },
-
-//    todo on country click filling this value
-    {"name": "clickedData", "init": null},
 
     {
       "name": "scale",
@@ -176,11 +188,13 @@ var VSpec = {
         "update": {
             "stroke": {"value": "white"},
           "fill": {"value": "lightblue"},
-          "cursor": {"value": "pointer"}
+          "cursor": {"value": "pointer"},
+          "opacity": {"signal":  "datum.properties.DATA"}
+
         },
         "hover": {
           "tooltip": {
-            "signal": "{'Name': datum.properties.NAME}"
+            "signal":  "datum.properties.DATA"
           },
            "fill": {"value": "steelblue"},
         },
