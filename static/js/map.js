@@ -2,46 +2,96 @@
 var institution_type = document.getElementById("institution_type").value;
 var current_country = "Czech Republic";
 var current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
+var current_gender = "total";
+var current_year = 0;
+var data_std = 0;
+var data_mean = 0;
+var data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.001;
+
+function normalize_data() {
+
+var data = retention_data.bachelor[institution_type];
+
+var sum = 0;
+for( var i = 0; i < data.length; i++ ){
+    sum +=  data[i];
+}
+
+data_mean = sum / current_data.values.length;
+
+console.log(current_data.values.length)
+
+
+
+};
+
+/**
+ *  redraws filters and processes data before displaying it on a map and a bar chart.
+ * @param current_data - The `current_data` parameter is an object that contains the name of the current country and an
+ * array of values related to bachelor retention data for that country and institution type. The function filters out
+ * values based on a specific gender range and then calculates the minimum value from the filtered data to adjust the view.
+ */
+function redraw(current_data) {
+current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
+current_data.values = current_data.values.filter(item => {
+return item[current_gender] > 0 && item[current_gender] < 1
+});
+/*  calculating the minimum value and adds delta to view min value */
+data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.001;
+show_map();
+
+show_bar(current_data);
+
+};
+
+/* event listener to the HTML element with the id "gender". */
+document.getElementById("gender").addEventListener("change", function() {
+current_gender = this.value;
+redraw(current_data);
+});
+
+/* event listener to the HTML element with the id "yearsRange". */
+document.getElementById("yearsRange").addEventListener("change", function() {
+current_year = this.value;
+redraw(current_data);
+});
 
 
 /* event listener to the HTML element with the id "institution_type". */
 document.getElementById("institution_type").addEventListener("change", function() {
 institution_type = this.value;
 console.log(institution_type);
-show_map();
-current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
-console.log(current_data);
-show_bar(current_data);
+redraw(current_data);
 });
 
 /* displaying an interactive map of Europe */
 function show_map() {
 
-var retention_countries = Object.keys(retention_data.bachelor[institution_type]);
-var europe_uni_filtered = structuredClone(europe_geo);
+    var retention_countries = Object.keys(retention_data.bachelor[institution_type]);
+    var europe_uni_filtered = structuredClone(europe_geo);
 
-/* filtering the geometries of European countries in the `europe_uni_filtered` object based on whether
-the country name is included in the `retention_countries` array. */
-europe_uni_filtered.objects.europe.geometries = europe_uni_filtered.objects.europe.geometries.filter(geometry => {
-    const countryName = geometry.properties.NAME;
-    return retention_countries.includes(countryName);
-});
-
-
-for (let i = 0; i < europe_uni_filtered.objects.europe.geometries.length; i++) {
-
-var retention = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][0];
-
-if (retention.total > 1.0 ) retention.total = 0.99;
-if (retention.total === 0 ) retention.total = 0.5;
-console.log(retention);
-europe_uni_filtered.objects.europe.geometries[i].properties.DATA = retention;
-
-}
+    /* filtering the geometries of European countries in the `europe_uni_filtered` object based on whether
+    the country name is included in the `retention_countries` array. */
+    europe_uni_filtered.objects.europe.geometries = europe_uni_filtered.objects.europe.geometries.filter(geometry => {
+        const countryName = geometry.properties.NAME;
+        return retention_countries.includes(countryName);
+    });
 
 
 
-console.log(europe_uni_filtered);
+    for (let i = 0; i < europe_uni_filtered.objects.europe.geometries.length; i++) {
+        /* retrieving the retention data for a specific country and institution type from the `retention_data` object based on the
+        country name obtained from the `europe_uni_filtered` object. */
+        var retention = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][current_year];
+
+        // todo normalizing data instead
+        if (retention[current_gender] > 1.0 ) retention[current_gender] = 1;
+        if (retention[current_gender] === 0 ) retention[current_gender] = 0;
+
+        europe_uni_filtered.objects.europe.geometries[i].properties.DATA = retention;
+    }
+
+
 
 var pict_width = 600;
 var pict_height = 500;
@@ -52,8 +102,14 @@ var VSpec = {
   "description": "An interactive map of Europe supporting pan and zoom.",
   "width": pict_width,
   "height": pict_height,
+    "autosize": {"type": "pad", "resize": true},
 
-     "title": "Interactive map",
+
+     "title": {
+     "text":"Interactive Map of Europe",
+     "dy": 30,
+     "fontSize": 20
+     },
 
   "signals": [
     { "name": "tx", "update": "width / 2" },
@@ -187,17 +243,17 @@ var VSpec = {
 
         "update": {
             "stroke": {"value": "white"},
-          "fill": {"value": "lightblue"},
+          "fill": {"value": "steelblue"},
           "cursor": {"value": "pointer"},
-          "opacity": {"signal":  "datum.properties.DATA.total"}
+          "opacity": {"signal":  "datum.properties.DATA." + current_gender}
 
         },
         "hover": {
           "tooltip": {
             "signal":
-  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
+  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'male+female': datum.properties.DATA." + current_gender + ", 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
           },
-           "fill": {"value": "steelblue"},
+           "fill": {"value": "lightblue"},
         },
       },
       "transform": [
@@ -214,7 +270,4 @@ var VSpec = {
 }
 
 
-
-
-
-show_map();
+redraw(current_data);

@@ -2,26 +2,21 @@
 
 function show_bar(current_data) {
 
-current_data.values = current_data.values.filter(item => {
-
-return item.total > 0 && item.total < 1
-
-});
-
-/*  calculating the minimum value and adds delta to view min value */
-var data_min = Math.min(...current_data.values.map(item => item.total)) - 0.001;
-
 
 var textvis =
 
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "width": 555,
-  "height": 200,
+  "height": 450,
   "padding":1,
 
-  "title": "Retention in " + current_data.name + " across years in % starting from minimum value",
 
+ "title": {
+     "text":  "Retention in " + current_data.name +  " across years in % starting from minimum value",
+     "dy": 30,
+     "fontSize": 13
+     },
 
   "data": [
    current_data
@@ -39,7 +34,7 @@ var textvis =
     },
     {
       "name": "yscale",
-      "domain": {"data": current_data.name, "field": "total"},
+      "domain": {"data": current_data.name, "field": current_gender},
       "nice": true,
       "range": "height",
       "domainMin": data_min
@@ -59,12 +54,12 @@ var textvis =
         "enter": {
           "x": {"scale": "xscale", "field": "year"},
           "width": {"scale": "xscale", "band": 1},
-          "y": {"scale": "yscale", "field": "total"},
+          "y": {"scale": "yscale", "field": current_gender},
           "y2": {"scale": "yscale", "value": data_min}
         },
         "update": {
           "fill": {"value": "steelblue"},
-          "tooltip": {"field": "total", "type": "quantitative"}
+          "tooltip": {"field": current_gender, "type": "quantitative"}
         },
       }
     },
@@ -84,4 +79,3 @@ var textvis =
 
   vegaEmbed('#textvis', textvis);
 }
-show_bar(current_data);
