@@ -1,9 +1,11 @@
 
 var institution_type = document.getElementById("institution_type").value;
+var institution_type_label = "Research Universities";
 var current_country = "Czech Republic";
 var current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
 var current_gender = "total";
-var current_year = 0;
+var current_year = 3;
+var current_year_label = 0;
 var data_std = 0;
 var data_mean = 0;
 var data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.001;
@@ -60,6 +62,11 @@ redraw(current_data);
 /* event listener to the HTML element with the id "institution_type". */
 document.getElementById("institution_type").addEventListener("change", function() {
 institution_type = this.value;
+if (institution_type === "RU") institution_type_label = "Research Universities";
+else if (institution_type === "UAS") institution_type_label = "Universities of Applied Sciences";
+else if (institution_type === "RU+UAS") institution_type_label = "Both institution types";
+
+
 console.log(institution_type);
 redraw(current_data);
 });
@@ -83,8 +90,8 @@ function show_map() {
         /* retrieving the retention data for a specific country and institution type from the `retention_data` object based on the
         country name obtained from the `europe_uni_filtered` object. */
         var retention = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][current_year];
-
-        // todo normalizing data instead
+        current_year_label = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][current_year]["year"]
+        // todo normalizing data instead and catching outliers
         if (retention[current_gender] > 1.0 ) retention[current_gender] = 1;
         if (retention[current_gender] === 0 ) retention[current_gender] = 0;
 
@@ -103,13 +110,18 @@ var VSpec = {
   "width": pict_width,
   "height": pict_height,
     "autosize": {"type": "pad", "resize": true},
+    "background": "white",
 
 
      "title": {
-     "text":"Interactive Map of Europe",
-     "dy": 30,
-     "fontSize": 20
+     "subtitle":"  Retention Rates in Informatics Studies in European Countries  ",
+      "text":  institution_type_label +  " " + current_gender + " in " + current_year_label,
+     "fontSize": 20,
+     "subtitleFontSize": 15,
+     "dy": 10,
      },
+
+//     todo legend of retention intensity
 
   "signals": [
     { "name": "tx", "update": "width / 2" },

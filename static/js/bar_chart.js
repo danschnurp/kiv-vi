@@ -9,13 +9,16 @@ var textvis =
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "width": 555,
   "height": 450,
-  "padding":1,
+  "padding": 5,
+  "autosize": "fit",
+      "background": "white",
 
 
  "title": {
-     "text":  "Retention in " + current_data.name +  " across years in % starting from minimum value",
-     "dy": 30,
-     "fontSize": 13
+     "text":  "Retention Rates in " + current_data.name,
+      "subtitle": " across years in % starting from minimum value",
+     "fontSize": 25,
+     "subtitleFontSize": 15
      },
 
   "data": [
@@ -59,7 +62,7 @@ var textvis =
         },
         "update": {
           "fill": {"value": "steelblue"},
-          "tooltip": {"field": current_gender, "type": "quantitative"}
+          "tooltip": {"field": current_gender}
         },
       }
     },
