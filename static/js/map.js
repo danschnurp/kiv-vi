@@ -66,8 +66,6 @@ if (institution_type === "RU") institution_type_label = "Research Universities";
 else if (institution_type === "UAS") institution_type_label = "Universities of Applied Sciences";
 else if (institution_type === "RU+UAS") institution_type_label = "Both institution types";
 
-
-console.log(institution_type);
 redraw(current_data);
 });
 
@@ -91,19 +89,18 @@ function show_map() {
         country name obtained from the `europe_uni_filtered` object. */
         var retention = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][current_year];
         current_year_label = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][current_year]["year"]
-        // todo normalizing data instead and catching outliers
-        if (retention[current_gender] > 1.0 ) retention[current_gender] = 1;
-        if (retention[current_gender] === 0 ) retention[current_gender] = 0;
+      if (retention[current_gender] > 1.0 ) retention[current_gender] = -1;
+
 
         europe_uni_filtered.objects.europe.geometries[i].properties.DATA = retention;
     }
 
 
 
-var pict_width = 600;
-var pict_height = 500;
+    var pict_width = 600;
+    var pict_height = 500;
 
-var VSpec = {
+    var VSpec = {
 
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "An interactive map of Europe supporting pan and zoom.",
@@ -239,7 +236,7 @@ var VSpec = {
 
         "update": {
             "stroke": {"value": "white"},
-          "fill": {"value": "lightgray"},
+          "fill": {"value": "white"},
 
         },
 
@@ -258,12 +255,11 @@ var VSpec = {
           "fill": {"value": "steelblue"},
           "cursor": {"value": "pointer"},
           "opacity": {"signal":  "datum.properties.DATA." + current_gender}
-
         },
         "hover": {
           "tooltip": {
             "signal":
-  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'male+female': datum.properties.DATA." + current_gender + ", 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
+  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
           },
            "fill": {"value": "lightblue"},
         },
