@@ -4,7 +4,7 @@ var institution_type_label = "Research Universities";
 var current_country = "Czech Republic";
 var current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
 var current_gender = "total";
-var current_year = 3;
+var current_year = 0;
 var current_year_label = 0;
 var data_std = 0;
 var data_mean = 0;
@@ -27,6 +27,20 @@ console.log(current_data.values.length)
 
 };
 
+function check_outliers() {
+
+ for (let i = 0; i < current_data.values.length; i++) {
+ console.log(current_data.values[i][current_gender]);
+if (current_data.values[i][current_gender] > 1){
+current_data =  { "name": current_country + " (outliers)", "values": retention_data.bachelor[institution_type][current_country]};
+
+return true;
+}
+}
+return false
+
+}
+
 /**
  *  redraws filters and processes data before displaying it on a map and a bar chart.
  * @param current_data - The `current_data` parameter is an object that contains the name of the current country and an
@@ -34,10 +48,16 @@ console.log(current_data.values.length)
  * values based on a specific gender range and then calculates the minimum value from the filtered data to adjust the view.
  */
 function redraw(current_data) {
+document.getElementById("yearsRange").max = retention_data.bachelor[institution_type][current_country].length - 1
 current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
 current_data.values = current_data.values.filter(item => {
 return item[current_gender] > 0 && item[current_gender] < 1
 });
+
+if (current_data.values.length == 0)
+current_data =  { "name": current_country + " (outliers)", "values": retention_data.bachelor[institution_type][current_country]};
+
+
 /*  calculating the minimum value and adds delta to view min value */
 data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.001;
 show_map();
@@ -45,6 +65,13 @@ show_map();
 show_bar(current_data);
 
 };
+
+document.getElementById("vis").addEventListener("dblclick", function() {
+current_country = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
+current_country = current_country[0].innerHTML
+redraw(current_data);
+});
+
 
 /* event listener to the HTML element with the id "gender". */
 document.getElementById("gender").addEventListener("change", function() {
@@ -89,7 +116,7 @@ function show_map() {
         country name obtained from the `europe_uni_filtered` object. */
         var retention = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][current_year];
         current_year_label = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][current_year]["year"]
-      if (retention[current_gender] > 1.0 ) retention[current_gender] = -1;
+      if (retention[current_gender] > 1.0 ) retention[current_gender] = 1;
 
 
         europe_uni_filtered.objects.europe.geometries[i].properties.DATA = retention;
@@ -236,7 +263,7 @@ function show_map() {
 
         "update": {
             "stroke": {"value": "white"},
-          "fill": {"value": "white"},
+          "fill": {"value": "lightgray"},
 
         },
 
