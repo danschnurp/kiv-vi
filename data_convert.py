@@ -37,7 +37,7 @@ def generate_json(dataframe):
         female = list(row[3::3].astype(str).replace(to_replace=["nan"], value="0").astype(float).to_dict().values())
         male = list(row[4::3].astype(str).replace(to_replace=["nan"], value="0").astype(float).to_dict().values())
 
-        json_data[country] = [{"year": i, "total": j, "male": k, "female": l} for i, j, k, l in
+        json_data[country] = [{"year": i, "total": j, "male": k, "female": l, "category": index} for i, j, k, l in
                               zip(years, total, male, female)]
 
     return json_data

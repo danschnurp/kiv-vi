@@ -8,7 +8,7 @@ var textvis =
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "width": 555,
-  "height": 450,
+  "height": 250,
   "padding": 5,
   "autosize": "fit",
       "background": "white",

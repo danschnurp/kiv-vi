@@ -58,10 +58,11 @@ if (current_data.values.length == 0)
 current_data =  { "name": current_country + " (outliers)", "values": retention_data.bachelor[institution_type][current_country]};
 
 
-/*  calculating the minimum value and adds delta to view min value */
-data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.001;
+/*  calculating the minimum value and adds magic 0,07 delta to view min value */
+data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.07;
 show_map();
 
+show_line(current_data);
 show_bar(current_data);
 
 };
@@ -281,12 +282,12 @@ function show_map() {
             "stroke": {"value": "white"},
           "fill": {"value": "steelblue"},
           "cursor": {"value": "pointer"},
-          "opacity": {"signal":  "datum.properties.DATA." + current_gender}
+          "opacity": {"signal":  "( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + " " }
         },
         "hover": {
           "tooltip": {
             "signal":
-  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
+  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'scaled':( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "  , 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
           },
            "fill": {"value": "lightblue"},
         },
