@@ -9,35 +9,19 @@ var current_year_label = 0;
 var data_std = 0;
 var data_mean = 0;
 var data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.001;
+var data_max = Math.max(...current_data.values.map(item => item[current_gender]));
 
-function normalize_data() {
-
-var data = retention_data.bachelor[institution_type];
-
-var sum = 0;
-for( var i = 0; i < data.length; i++ ){
-    sum +=  data[i];
-}
-
-data_mean = sum / current_data.values.length;
-
-console.log(current_data.values.length)
-
-
-
-};
 
 function check_outliers() {
+     for (let i = 0; i < current_data.values.length; i++) {
+         console.log(current_data.values[i][current_gender]);
+        if (current_data.values[i][current_gender] > 1){
+        current_data =  { "name": current_country + " (outliers)", "values": retention_data.bachelor[institution_type][current_country]};
 
- for (let i = 0; i < current_data.values.length; i++) {
- console.log(current_data.values[i][current_gender]);
-if (current_data.values[i][current_gender] > 1){
-current_data =  { "name": current_country + " (outliers)", "values": retention_data.bachelor[institution_type][current_country]};
-
-return true;
-}
-}
-return false
+        return true;
+        }
+    }
+    return false
 
 }
 
@@ -48,22 +32,18 @@ return false
  * values based on a specific gender range and then calculates the minimum value from the filtered data to adjust the view.
  */
 function redraw(current_data) {
+//console.log(retention_data.bachelor[institution_type][current_country]);
 document.getElementById("yearsRange").max = retention_data.bachelor[institution_type][current_country].length - 1
 current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
-current_data.values = current_data.values.filter(item => {
-return item[current_gender] > 0 && item[current_gender] < 1
-});
 
-if (current_data.values.length == 0)
-current_data =  { "name": current_country + " (outliers)", "values": retention_data.bachelor[institution_type][current_country]};
-
-
-/*  calculating the minimum value and adds magic 0,07 delta to view min value */
-data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.07;
+/*  calculating the minimum value and adds magic 0,1 delta to view min value */
+data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.09;
+data_max = Math.max(...current_data.values.map(item => item[current_gender]));
 show_map();
 
 show_line(current_data);
-show_bar(current_data);
+
+show_bar(structuredClone(current_data));
 
 };
 
@@ -146,7 +126,36 @@ function show_map() {
      "dy": 10,
      },
 
-//     todo legend of retention intensity
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [0.1, 0.9],
+      "range": {"scheme": "blues", "count": 5}
+    },
+     {
+      "name": "outlier",
+      "type": "ordinal",
+      "domain": [1.01, 0],
+      "range": ["rgb(215, 159, 159)", "rgb(174, 187, 198)"]
+    }
+  ],
+
+    "legends": [
+    {
+      "fill": "color",
+      "orient": "bottom-right",
+      "title": "Retention Rates",
+      "format": "0.1%"
+    },
+        {
+      "fill": "outlier",
+      "orient": "bottom-right",
+      "title": "Outlier",
+      "format": "0.1%"
+    }
+  ],
+
 
   "signals": [
     { "name": "tx", "update": "width / 2" },
@@ -201,7 +210,7 @@ function show_map() {
       }]
     },
     {
-      "name": "rotateX", "value": 0,
+      "name": "rotateX", "value": -6,
       "on": [{
         "events": {"signal": "delta"},
         "update": "angles[0] + delta[0]"
@@ -280,14 +289,15 @@ function show_map() {
 
         "update": {
             "stroke": {"value": "white"},
-          "fill": {"value": "steelblue"},
+          "fill": {"signal": "1.0 > datum.properties.DATA." + current_gender + "  ?  'steelblue': 'red'"},
           "cursor": {"value": "pointer"},
-          "opacity": {"signal":  "( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + " " }
+          "opacity": {"signal": "1.0 > datum.properties.DATA." + current_gender + " && datum.properties.DATA." + current_gender + " > 0.0 ? ( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + ":  0.2" }
         },
         "hover": {
           "tooltip": {
             "signal":
-  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'scaled':( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "  , 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
+  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'scaled':( datum.properties.DATA." +
+  current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "  , 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
           },
            "fill": {"value": "lightblue"},
         },

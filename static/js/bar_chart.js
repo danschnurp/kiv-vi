@@ -3,6 +3,15 @@
 function show_bar(current_data) {
 
 
+current_data.values = current_data.values.filter(item => {
+return item[current_gender] > 0 && item[current_gender] < 1
+});
+if (current_data.values.length == 0)
+    current_data =  { "name": current_country + " (outliers)", "values": retention_data.bachelor[institution_type][current_country]};
+/*  calculating the minimum value and adds magic 0,01 delta to view min value */
+data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.01;
+
+
 var textvis =
 
 {
@@ -16,7 +25,7 @@ var textvis =
 
  "title": {
      "text":  "Retention Rates in " + current_data.name,
-      "subtitle": " across years in % starting from minimum value",
+      "subtitle": "starting from minimum value",
      "fontSize": 25,
      "subtitleFontSize": 15
      },
@@ -32,7 +41,7 @@ var textvis =
       "type": "band",
       "domain": {"data": current_data.name, "field": "year"},
       "range": "width",
-      "padding": 0.6,
+      "padding": 0.5,
       "round": true
     },
     {
@@ -46,7 +55,7 @@ var textvis =
 
   "axes": [
     { "orient": "bottom", "scale": "xscale" },
-    { "orient": "left", "scale": "yscale" }
+    { "orient": "left", "scale": "yscale" , "format": "0.1%"}
   ],
 
   "marks": [
@@ -56,7 +65,7 @@ var textvis =
       "encode": {
         "enter": {
           "x": {"scale": "xscale", "field": "year"},
-          "width": {"scale": "xscale", "band": 1},
+          "width": {"scale": "xscale", "band": data_max},
           "y": {"scale": "yscale", "field": current_gender},
           "y2": {"scale": "yscale", "value": data_min}
         },
