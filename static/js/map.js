@@ -10,6 +10,7 @@ var data_std = 0;
 var data_mean = 0;
 var data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.001;
 var data_max = Math.max(...current_data.values.map(item => item[current_gender]));
+document.getElementById("yearsRange").max = retention_data.bachelor[institution_type][current_country].length - 1
 
 
 function check_outliers() {
@@ -33,7 +34,6 @@ function check_outliers() {
  */
 function redraw(current_data) {
 //console.log(retention_data.bachelor[institution_type][current_country]);
-document.getElementById("yearsRange").max = retention_data.bachelor[institution_type][current_country].length - 1
 current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
 
 /*  calculating the minimum value and adds magic 0,1 delta to view min value */
