@@ -33,17 +33,29 @@ function check_outliers() {
  * values based on a specific gender range and then calculates the minimum value from the filtered data to adjust the view.
  */
 function redraw(current_data) {
+try {
 //console.log(retention_data.bachelor[institution_type][current_country]);
 current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
 
 /*  calculating the minimum value and adds magic 0,1 delta to view min value */
 data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.09;
 data_max = Math.max(...current_data.values.map(item => item[current_gender]));
+}
+catch(err) {
+current_data = { "name": current_country, "values": {}};
+data_min = 0;
+data_max = 1;
+
+}
 show_map();
+try {
+show_line(current_data, current_gender, institution_type_label);
 
-show_line(current_data, current_gender);
-
-show_bar(structuredClone(current_data), current_gender);
+show_bar(structuredClone(current_data), current_gender, institution_type_label);
+}
+catch(err) {
+console.log("No data for that...")
+}
 
 };
 
