@@ -41,9 +41,9 @@ data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 
 data_max = Math.max(...current_data.values.map(item => item[current_gender]));
 show_map();
 
-show_line(current_data);
+show_line(current_data, current_gender);
 
-show_bar(structuredClone(current_data));
+show_bar(structuredClone(current_data), current_gender);
 
 };
 

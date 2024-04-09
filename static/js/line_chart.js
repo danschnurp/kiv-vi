@@ -1,6 +1,6 @@
 
 
-function show_line(current_data) {
+function show_line(current_data, current_gender) {
 
 
 var linevis = {
@@ -13,7 +13,7 @@ var linevis = {
 
 
  "title": {
-     "text":  "Retention Rates in " + current_data.name,
+     "text":  "Retention Rates " + current_gender + " in " + current_data.name,
       "subtitle": " across years in % ",
      "fontSize": 25,
      "subtitleFontSize": 15
