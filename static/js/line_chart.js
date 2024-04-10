@@ -3,6 +3,8 @@
 function show_line(current_data, current_gender, institution_type_label) {
 
 
+    try {
+
 var linevis = {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "width": 555,
@@ -13,8 +15,8 @@ var linevis = {
 
 
  "title": {
-     "text":  "Retention Rates "+ current_gender +" in " + current_data.name,
-        "subtitle": institution_type_label,
+     "text":  current_gender + " retention rates in " + current_data.name,
+        "subtitle": institution_type_label + " over all years",
      "fontSize": 25,
      "subtitleFontSize": 15
      },
@@ -88,4 +90,13 @@ var linevis = {
 }
 
  vegaEmbed('#linevis', linevis);
+
+      }
+    catch(err) {
+    linevis = {}
+    console.log("No data for that...")
+    }
+
+
+
  }

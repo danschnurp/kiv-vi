@@ -1,4 +1,6 @@
 
+
+// default values on init
 var institution_type = document.getElementById("institution_type").value;
 var institution_type_label = "Research Universities";
 var current_country = "Czech Republic";
@@ -10,88 +12,91 @@ var data_std = 0;
 var data_mean = 0;
 var data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.001;
 var data_max = Math.max(...current_data.values.map(item => item[current_gender]));
-document.getElementById("yearsRange").max = retention_data.bachelor[institution_type][current_country].length - 1
+document.getElementById("yearsRange").max = retention_data.bachelor[institution_type][current_country].length - 1;
 
 
-function check_outliers() {
-     for (let i = 0; i < current_data.values.length; i++) {
-         console.log(current_data.values[i][current_gender]);
-        if (current_data.values[i][current_gender] > 1){
-        current_data =  { "name": current_country + " (outliers)", "values": retention_data.bachelor[institution_type][current_country]};
 
-        return true;
-        }
+/**
+ * The function `update_data` retrieves and processes data for a specific country, institution type, and gender,
+ * calculating the minimum and maximum values.
+ */
+function update_data() {
+    try {
+        //console.log(retention_data.bachelor[institution_type][current_country]);
+        current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
+
+        /*  calculating the minimum value and adds magic 0,1 delta to view min value */
+        data_min = Math.min(...current_data.values.map(item => item[current_gender])) + 0.09;
+        data_max = Math.max(...current_data.values.map(item => item[current_gender]));
     }
-    return false
-
+    catch(err) {
+        current_data = { "name": current_country, "values": {}};
+        data_min = 0;
+        data_max = 1;
+    }
 }
 
 /**
- *  redraws filters and processes data before displaying it on a map and a bar chart.
+ *  redraw_charts filters and processes data before displaying it on a map and a bar chart.
  * @param current_data - The `current_data` parameter is an object that contains the name of the current country and an
  * array of values related to bachelor retention data for that country and institution type. The function filters out
  * values based on a specific gender range and then calculates the minimum value from the filtered data to adjust the view.
  */
-function redraw(current_data) {
-try {
-//console.log(retention_data.bachelor[institution_type][current_country]);
-current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
+function redraw_charts(current_data) {
 
-/*  calculating the minimum value and adds magic 0,1 delta to view min value */
-data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.09;
-data_max = Math.max(...current_data.values.map(item => item[current_gender]));
-}
-catch(err) {
-current_data = { "name": current_country, "values": {}};
-data_min = 0;
-data_max = 1;
+    show_line(structuredClone(current_data), current_gender, institution_type_label);
 
-}
-show_map();
-try {
-show_line(current_data, current_gender, institution_type_label);
+    show_bar(structuredClone(current_data), current_gender, institution_type_label);
 
-show_bar(structuredClone(current_data), current_gender, institution_type_label);
-}
-catch(err) {
-console.log("No data for that...")
-}
 
 };
 
+/* choosing the country for charts */
 document.getElementById("vis").addEventListener("dblclick", function() {
-current_country = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
-current_country = current_country[0].innerHTML
-redraw(current_data);
+    current_country = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
+    current_country = current_country[0].innerHTML
+    update_data();
+    redraw_charts(current_data);
+
 });
 
 
 /* event listener to the HTML element with the id "gender". */
 document.getElementById("gender").addEventListener("change", function() {
-current_gender = this.value;
-redraw(current_data);
+    current_gender = this.value;
+    update_data();
+    redraw_charts(current_data);
+    show_map(current_data);
 });
 
 /* event listener to the HTML element with the id "yearsRange". */
 document.getElementById("yearsRange").addEventListener("change", function() {
-current_year = this.value;
-redraw(current_data);
+    current_year = this.value;
+    update_data();
+    redraw_charts(current_data);
+    show_map(current_data);
 });
 
 
 /* event listener to the HTML element with the id "institution_type". */
 document.getElementById("institution_type").addEventListener("change", function() {
-institution_type = this.value;
-if (institution_type === "RU") institution_type_label = "Research Universities";
-else if (institution_type === "UAS") institution_type_label = "Universities of Applied Sciences";
-else if (institution_type === "RU+UAS") institution_type_label = "Both institution types";
-
-redraw(current_data);
+    institution_type = this.value;
+    if (institution_type === "RU") institution_type_label = "Research Universities";
+    else if (institution_type === "UAS") institution_type_label = "Universities of Applied Sciences";
+    else if (institution_type === "RU+UAS") institution_type_label = "Both institution types";
+    update_data();
+    redraw_charts(current_data);
+    show_map(current_data);
 });
 
-/* displaying an interactive map of Europe */
-function show_map() {
 
+
+
+
+/* displaying an interactive map of Europe */
+function show_map(current_data) {
+
+    update_data();
     var retention_countries = Object.keys(retention_data.bachelor[institution_type]);
     var europe_uni_filtered = structuredClone(europe_geo);
 
@@ -102,6 +107,14 @@ function show_map() {
         return retention_countries.includes(countryName);
     });
 
+    var europe_uni_not_participated = structuredClone(europe_geo);
+
+    /* filtering the geometries of European countries in the `europe_uni_not_participated` object based on whether
+    the country name is included in the `retention_countries` array. */
+    europe_uni_not_participated.objects.europe.geometries = europe_uni_not_participated.objects.europe.geometries.filter(geometry => {
+        const countryName = geometry.properties.NAME;
+        return !retention_countries.includes(countryName);
+    });
 
 
     for (let i = 0; i < europe_uni_filtered.objects.europe.geometries.length; i++) {
@@ -109,13 +122,12 @@ function show_map() {
         country name obtained from the `europe_uni_filtered` object. */
         var retention = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][current_year];
         current_year_label = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[i].properties.NAME][current_year]["year"]
-      if (retention[current_gender] > 1.0 ) retention[current_gender] = 1;
-
 
         europe_uni_filtered.objects.europe.geometries[i].properties.DATA = retention;
     }
 
-
+    // updating the current year label on slider
+    document.getElementById("yearsRangeLabel").innerHTML = "Current year: " + current_year_label;
 
     var pict_width = 600;
     var pict_height = 500;
@@ -131,41 +143,34 @@ function show_map() {
 
 
      "title": {
-     "subtitle":"  Retention Rates in Informatics Studies in European Countries  ",
-      "text":  institution_type_label +  " " + current_gender + " in " + current_year_label,
+     "subtitle":"  Retention Rates in Informatics Studies across European Countries  ",
+      "text":  institution_type_label + " in " + current_year_label,
      "fontSize": 20,
      "subtitleFontSize": 15,
-     "dy": 10,
+     "dy": 1,
      },
 
   "scales": [
     {
       "name": "color",
       "type": "ordinal",
-      "domain": [0.1, 0.9],
-      "range": {"scheme": "blues", "count": 5}
-    },
-     {
-      "name": "outlier",
-      "type": "ordinal",
-      "domain": [1.01, 0],
-      "range": ["rgb(215, 159, 159)", "rgb(174, 187, 198)"]
+      "nice": true,
+      "domain": [0, 0.5, 0.7, 0.99, 1.01],
+      "range": [ "rgba(50, 50, 50, 0.5)", "rgba(70,130,180, 0.5)", "rgba(70,130,180, 0.7)", "rgba(70,130,180, 0.99)",  "rgb(170, 57, 57, 0.5)"]
     }
   ],
 
     "legends": [
+
     {
+
+ "fillColor": "rgba(255,255,255,0.5)",
       "fill": "color",
       "orient": "bottom-right",
-      "title": "Retention Rates",
+      "title": current_gender + " rates",
       "format": "0.1%"
     },
-        {
-      "fill": "outlier",
-      "orient": "bottom-right",
-      "title": "Outlier",
-      "format": "0.1%"
-    }
+
   ],
 
 
@@ -258,7 +263,7 @@ function show_map() {
   "data": [
        {
       "name": "europe_uni",
-      "values": europe_geo,
+      "values": europe_uni_not_participated,
       "format": {
         "type": "topojson",
         "feature": "europe"
@@ -301,9 +306,9 @@ function show_map() {
 
         "update": {
             "stroke": {"value": "white"},
-          "fill": {"signal": "1.0 > datum.properties.DATA." + current_gender + "  ?  'steelblue': 'red'"},
+          "fill": {"signal": "1.0 < datum.properties.DATA." + current_gender + "  ? 'rgb(170, 57, 57)' : 0 === datum.properties.DATA." + current_gender + " ? 'rgb(50, 50, 50)': 'steelblue'"},
           "cursor": {"value": "pointer"},
-          "opacity": {"signal": "1.0 > datum.properties.DATA." + current_gender + " && datum.properties.DATA." + current_gender + " > 0.0 ? ( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + ":  0.2" }
+          "opacity": {"signal": "1.0 > datum.properties.DATA." + current_gender + " && datum.properties.DATA." + current_gender + " > 0.0 ? ( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + ":  0.5" }
         },
         "hover": {
           "tooltip": {
@@ -327,5 +332,7 @@ function show_map() {
 
 }
 
-
-redraw(current_data);
+// initialization call
+update_data();
+redraw_charts(current_data);
+show_map(current_data);
