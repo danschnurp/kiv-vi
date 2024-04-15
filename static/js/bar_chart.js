@@ -25,8 +25,8 @@ function show_bar(current_data, current_gender, institution_type_label) {
 
 
      "title": {
-         "text": current_gender + " retention rates in " + current_data.name,
-          "subtitle": institution_type_label + " starting from minimum value",
+         "text": titleCase(current_gender) + " Retention Rates in " + current_data.name,
+          "subtitle": institution_type_label + " Starting from Minimum Value",
          "fontSize": 25,
          "subtitleFontSize": 15
          },
@@ -41,22 +41,25 @@ function show_bar(current_data, current_gender, institution_type_label) {
           "name": "xscale",
           "type": "band",
           "domain": {"data": current_data.name, "field": "year"},
-          "range": "width",
-          "padding": 0.5,
-          "round": true
+          "range": "height",
+                    "nice": true,
+                              "padding": 0.5,
+
         },
         {
           "name": "yscale",
           "domain": {"data": current_data.name, "field": current_gender},
-          "nice": true,
-          "range": "height",
+"round": true,
+
+                    "range": "width",
+
           "domainMin": data_min
         }
       ],
 
       "axes": [
-        { "orient": "bottom", "scale": "xscale" },
-        { "orient": "left", "scale": "yscale" , "format": "0.1%"}
+        { "orient": "left", "scale": "xscale" },
+        { "orient": "top", "scale": "yscale" , "format": "0.1%"}
       ],
 
       "marks": [
@@ -65,10 +68,10 @@ function show_bar(current_data, current_gender, institution_type_label) {
           "from": {"data":current_data.name},
           "encode": {
             "enter": {
-              "x": {"scale": "xscale", "field": "year"},
-              "width": {"scale": "xscale", "band": data_max},
-              "y": {"scale": "yscale", "field": current_gender},
-              "y2": {"scale": "yscale", "value": data_min}
+              "y": {"scale": "xscale", "field": "year"},
+              "height": {"scale": "xscale", "band": data_max},
+              "x": {"scale": "yscale", "field": current_gender},
+              "x2": {"scale": "yscale", "value": data_min}
             },
             "update": {
               "fill": {"value": "steelblue"},

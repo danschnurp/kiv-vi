@@ -15,8 +15,8 @@ var linevis = {
 
 
  "title": {
-     "text":  current_gender + " retention rates in " + current_data.name,
-        "subtitle": institution_type_label + " over all years",
+     "text":  titleCase(current_gender) + " Retention Rates in " + current_data.name,
+        "subtitle": institution_type_label + " Over All Years",
      "fontSize": 25,
      "subtitleFontSize": 15
      },

@@ -14,7 +14,9 @@ var data_min = Math.min(...current_data.values.map(item => item[current_gender])
 var data_max = Math.max(...current_data.values.map(item => item[current_gender]));
 document.getElementById("yearsRange").max = retention_data.bachelor[institution_type][current_country].length - 1;
 
-
+function titleCase(string){
+  return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
 
 /**
  * The function `update_data` retrieves and processes data for a specific country, institution type, and gender,
@@ -127,7 +129,9 @@ function show_map(current_data) {
     }
 
     // updating the current year label on slider
-    document.getElementById("yearsRangeLabel").innerHTML = "Current year: " + current_year_label;
+//    document.getElementById("yearsRangeLabel").innerHTML = " &nbsp &nbsp " + current_year_label;
+    document.getElementById("start_years_range").innerHTML = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[0].properties.NAME][0]["year"];
+    document.getElementById("end_years_range").innerHTML = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[0].properties.NAME][retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[0].properties.NAME].length - 1]["year"];
 
     var pict_width = 600;
     var pict_height = 500;
