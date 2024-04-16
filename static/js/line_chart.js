@@ -15,7 +15,7 @@ var linevis = {
 
 
  "title": {
-     "text":  titleCase(current_gender) + " Retention Rates in " + current_data.name,
+     "text":  titleCase(current_gender) + " Retention Rates ",
         "subtitle": institution_type_label + " Over All Years",
      "fontSize": 25,
      "subtitleFontSize": 15
@@ -45,9 +45,21 @@ var linevis = {
       "name": "color",
       "type": "ordinal",
       "range": "category",
-      "domain": {"data": current_data.name, "field": "category"}
+      "domain": {"data": current_data.name, "field": "category"},
+           "range": {"scheme": "category20"}
+    },        {
+      "name": "color_labels",
+      "type": "ordinal",
+      "domain": current_data.country_names,
+      "range": {"scheme": "category20"}
+
     }
   ],
+
+    "legends": [
+    {"fill": "color_labels", "offset": 0, "zindex": 1}
+  ],
+
 
   "axes": [
     {"orient": "bottom", "scale": "x"},

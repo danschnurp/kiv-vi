@@ -32,7 +32,7 @@
              <div class="row">
                  <span>
                  <input type="range" class="form-range" min="0" max="20" value="0" step="1" id="yearsRange">
-                     <span>
+                     </span>
 <span>
            <label id="start_years_range"></label>   <label for="yearsRange" class="form-label" id="yearsRangeLabel"></label>
                  <label class="float-end" id="end_years_range"></label>
@@ -67,16 +67,35 @@
      <div class="row">
           <div class="col">
 
+                            <div  class="border" id="linevis"></div>
+                       <br>
+                       <br>
+
     <div  class="border" id="vis"></div>
               <p>Select one country to view chart details on <b>double click</b>.
                 The countries with 0% retention have no data for selected year and gender, but they can be selected.  </p>
           </div>
                    <div class="col">
-
-              <div  class="border" id="linevis"></div>
-                       <br>
-                       <br>
-
+           <div class="col">
+               <label> choose countries order to compare:</label>
+               <br>
+             <div>
+         <input type="radio" id="current_data" name="country_order" value="current_data" checked>
+  <label id="country" for="current_data">1.</label>
+             </div>
+                  <div>
+               <input type="radio" id="current_data2" name="country_order" value="current_data2">
+  <label id="country2" for="current_data2">2.</label>
+</div>
+                  <div>
+                              <input type="radio" id="current_data3" name="country_order" value="current_data3">
+  <label id="country3" for="current_data3">3.</label>
+</div>
+                  <div>
+               <input type="radio" id="current_data4" name="country_order" value="current_data4">
+  <label id="country4" for="current_data4">4.</label>
+                  </div>
+           </div>
     <div  class="border" id="textvis"></div>
 <p> The data are filtered over non-empty and non-outlier years.</p>
                    </div>

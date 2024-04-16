@@ -4,6 +4,9 @@
 var institution_type = document.getElementById("institution_type").value;
 var institution_type_label = "Research Universities";
 var current_country = "Czech Republic";
+var current_country2 = "Germany";
+var current_country3 = "United Kingdom";
+var current_country4 = "Portugal";
 var current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
 var current_gender = "total";
 var current_year = 0;
@@ -24,10 +27,23 @@ function titleCase(string){
  */
 function update_data() {
     try {
-        //console.log(retention_data.bachelor[institution_type][current_country]);
-        current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
+        console.log(document.getElementById("current_data").innerHTML);
+        document.getElementById("country").innerHTML = "1. " + current_country;
+        document.getElementById("country2").innerHTML =  "2. " + current_country2;
 
-        /*  calculating the minimum value and adds magic 0,1 delta to view min value */
+        document.getElementById("country3").innerHTML =  "3. " + current_country3;
+
+        document.getElementById("country4").innerHTML =  "4. " + current_country4;
+
+//        todo checking the data for emptiness if there is the france at 1. there is a info mismatch
+
+        current_data =  { "name": current_country, "country_names": [current_country, current_country2,current_country3,current_country4 ],
+          "values": retention_data.bachelor[institution_type][current_country]
+          .concat(retention_data.bachelor[institution_type][current_country2])
+          .concat(retention_data.bachelor[institution_type][current_country3])
+          .concat(retention_data.bachelor[institution_type][current_country4])};
+
+        /*  calculating the minimum value and adds magic delta to view min value */
         data_min = Math.min(...current_data.values.map(item => item[current_gender])) + 0.09;
         data_max = Math.max(...current_data.values.map(item => item[current_gender]));
     }
@@ -55,10 +71,31 @@ function redraw_charts(current_data) {
 
 /* choosing the country for charts */
 document.getElementById("vis").addEventListener("dblclick", function() {
-    current_country = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
-    current_country = current_country[0].innerHTML
-    update_data();
-    redraw_charts(current_data);
+console.log(document.querySelector('input[name="country_order"]:checked').value)
+    switch (document.querySelector('input[name="country_order"]:checked').value) {
+    case "current_data":
+        current_country = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
+        current_country = current_country[0].innerHTML;
+
+        break;
+    case "current_data2":
+        current_country2 = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
+        current_country2 = current_country2[0].innerHTML;
+
+        break;
+    case "current_data3":
+        current_country3 = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
+        current_country3 = current_country3[0].innerHTML;
+
+        break;
+    case "current_data4":
+        current_country4 = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
+        current_country4 = current_country4[0].innerHTML;
+        break;
+    }
+
+        update_data();
+        redraw_charts(current_data);
 
 });
 
