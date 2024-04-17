@@ -87,7 +87,11 @@ document.getElementById("vis").addEventListener("dblclick", function(e) {
         var selected_country = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
         selected_country = selected_country[0].innerHTML;
 //        if (e.shiftKey)
-        current_countries.push(selected_country);
+
+        current_countries = new Set(current_countries);
+        current_countries.add(selected_country);
+        current_countries = Array.from(current_countries);
+
 
         update_data();
         redraw_charts(current_data);
