@@ -3,12 +3,11 @@
 function show_line(current_data, current_gender, institution_type_label) {
 
 
-    try {
 
 var linevis = {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "width": 555,
-  "height": 200,
+  "width": 590,
+  "height": 150,
   "padding": 5,
   "autosize": "fit",
       "background": "white",
@@ -17,8 +16,8 @@ var linevis = {
  "title": {
      "text":  titleCase(current_gender) + " Retention Rates ",
         "subtitle": institution_type_label + " Over All Years",
-     "fontSize": 25,
-     "subtitleFontSize": 15
+     "fontSize": 15,
+     "subtitleFontSize": 10
      },
 
   "data": [
@@ -31,7 +30,7 @@ var linevis = {
       "name": "x",
       "type": "point",
       "range": "width",
-     "domain": {"data": current_data.name, "field": "year"},
+     "domain": {"data": "countrydata", "field": "year"},
     },
     {
       "name": "y",
@@ -39,13 +38,13 @@ var linevis = {
       "range": "height",
       "nice": true,
       "zero": true,
-      "domain": {"data": current_data.name, "field": current_gender},
+      "domain": {"data": "countrydata", "field": current_gender},
     },
     {
       "name": "color",
       "type": "ordinal",
       "range": "category",
-      "domain": {"data": current_data.name, "field": "category"},
+      "domain": {"data": "countrydata", "field": "category"},
            "range": {"scheme": "category20"}
     },        {
       "name": "color_labels",
@@ -72,7 +71,7 @@ var linevis = {
       "from": {
         "facet": {
           "name": "series",
-          "data": current_data.name,
+          "data": "countrydata",
           "groupby": "category"
         }
       },
@@ -103,11 +102,7 @@ var linevis = {
 
  vegaEmbed('#linevis', linevis);
 
-      }
-    catch(err) {
-    linevis = {}
-    console.log("No data for that...")
-    }
+
 
 
 

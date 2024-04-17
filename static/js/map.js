@@ -3,19 +3,15 @@
 // default values on init
 var institution_type = document.getElementById("institution_type").value;
 var institution_type_label = "Research Universities";
-var current_country = "Czech Republic";
-var current_country2 = "Germany";
-var current_country3 = "United Kingdom";
-var current_country4 = "Portugal";
-var current_data =  { "name": current_country, "values": retention_data.bachelor[institution_type][current_country]};
+var current_countries = ["Czech Republic"];
+
+var current_data =  { "name": "Czech Republic", "values": structuredClone(retention_data).bachelor[institution_type]["Czech Republic"]};;
+var filtered_data = { "name": "Czech Republic", "values": structuredClone(retention_data).bachelor[institution_type]["Czech Republic"]};
 var current_gender = "total";
 var current_year = 0;
 var current_year_label = 0;
-var data_std = 0;
-var data_mean = 0;
-var data_min = Math.min(...current_data.values.map(item => item[current_gender])) - 0.001;
-var data_max = Math.max(...current_data.values.map(item => item[current_gender]));
-document.getElementById("yearsRange").max = retention_data.bachelor[institution_type][current_country].length - 1;
+
+document.getElementById("yearsRange").max = structuredClone(retention_data).bachelor[institution_type]["Czech Republic"].length - 1;
 
 function titleCase(string){
   return string[0].toUpperCase() + string.slice(1).toLowerCase();
@@ -26,33 +22,48 @@ function titleCase(string){
  * calculating the minimum and maximum values.
  */
 function update_data() {
-    try {
-        console.log(document.getElementById("current_data").innerHTML);
-        document.getElementById("country").innerHTML = "1. " + current_country;
-        document.getElementById("country2").innerHTML =  "2. " + current_country2;
 
-        document.getElementById("country3").innerHTML =  "3. " + current_country3;
+        var data_values = [];
+        var data_values_filtered = [];
+        var data_names = [];
+        var data_names_filtered = [];
 
-        document.getElementById("country4").innerHTML =  "4. " + current_country4;
 
-//        todo checking the data for emptiness if there is the france at 1. there is a info mismatch
+        for (let i in current_countries) {
+            // non-filtered for linechart
+            retention_data.bachelor[institution_type][current_countries[i]].forEach(item => data_values.push(item));
+            data_names.push( structuredClone(current_countries[i]));
 
-        current_data =  { "name": current_country, "country_names": [current_country, current_country2,current_country3,current_country4 ],
-          "values": retention_data.bachelor[institution_type][current_country]
-          .concat(retention_data.bachelor[institution_type][current_country2])
-          .concat(retention_data.bachelor[institution_type][current_country3])
-          .concat(retention_data.bachelor[institution_type][current_country4])};
+            // filtered for barchart
+            var temp_data = [];
+            retention_data.bachelor[institution_type][current_countries[i]].forEach(item => temp_data.push(item));
 
-        /*  calculating the minimum value and adds magic delta to view min value */
-        data_min = Math.min(...current_data.values.map(item => item[current_gender])) + 0.09;
-        data_max = Math.max(...current_data.values.map(item => item[current_gender]));
+            temp_data = structuredClone(retention_data.bachelor[institution_type][current_countries[i]]).filter(item => {
+                                                                return item[current_gender] > 0 && item[current_gender] < 1
+                                                            });
+
+
+
+            if (temp_data.length > 0) {
+                temp_data.forEach(item => data_values_filtered.push(item));
+                data_names_filtered.push(current_countries[i]);
+                }
+        }
+
+       filtered_data = { "name": "countrydata",
+        "country_names": data_names_filtered,
+          "values": data_values_filtered
+          };
+
+       current_data =  { "name": "countrydata",
+        "country_names":  structuredClone(data_names),
+          "values": structuredClone(data_values)
+          };
+
+
+
     }
-    catch(err) {
-        current_data = { "name": current_country, "values": {}};
-        data_min = 0;
-        data_max = 1;
-    }
-}
+
 
 /**
  *  redraw_charts filters and processes data before displaying it on a map and a bar chart.
@@ -64,44 +75,35 @@ function redraw_charts(current_data) {
 
     show_line(structuredClone(current_data), current_gender, institution_type_label);
 
-    show_bar(structuredClone(current_data), current_gender, institution_type_label);
+    show_bar(structuredClone(filtered_data), current_gender, institution_type_label);
 
 
 };
 
 /* choosing the country for charts */
-document.getElementById("vis").addEventListener("dblclick", function() {
-console.log(document.querySelector('input[name="country_order"]:checked').value)
-    switch (document.querySelector('input[name="country_order"]:checked').value) {
-    case "current_data":
-        current_country = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
-        current_country = current_country[0].innerHTML;
+document.getElementById("vis").addEventListener("dblclick", function(e) {
 
-        break;
-    case "current_data2":
-        current_country2 = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
-        current_country2 = current_country2[0].innerHTML;
 
-        break;
-    case "current_data3":
-        current_country3 = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
-        current_country3 = current_country3[0].innerHTML;
-
-        break;
-    case "current_data4":
-        current_country4 = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
-        current_country4 = current_country4[0].innerHTML;
-        break;
-    }
+        var selected_country = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
+        selected_country = selected_country[0].innerHTML;
+//        if (e.shiftKey)
+        current_countries.push(selected_country);
 
         update_data();
         redraw_charts(current_data);
 
 });
 
+document.getElementById("selected_countries").addEventListener("click", function(e) {
+ current_countries = []
+         update_data();
+        redraw_charts(current_data);
+});
+
 
 /* event listener to the HTML element with the id "gender". */
 document.getElementById("gender").addEventListener("change", function() {
+current_countries = ["Czech Republic"];
     current_gender = this.value;
     update_data();
     redraw_charts(current_data);
@@ -110,6 +112,7 @@ document.getElementById("gender").addEventListener("change", function() {
 
 /* event listener to the HTML element with the id "yearsRange". */
 document.getElementById("yearsRange").addEventListener("change", function() {
+current_countries = ["Czech Republic"];
     current_year = this.value;
     update_data();
     redraw_charts(current_data);
@@ -119,6 +122,7 @@ document.getElementById("yearsRange").addEventListener("change", function() {
 
 /* event listener to the HTML element with the id "institution_type". */
 document.getElementById("institution_type").addEventListener("change", function() {
+current_countries = ["Czech Republic"];
     institution_type = this.value;
     if (institution_type === "RU") institution_type_label = "Research Universities";
     else if (institution_type === "UAS") institution_type_label = "Universities of Applied Sciences";
@@ -136,8 +140,28 @@ document.getElementById("institution_type").addEventListener("change", function(
 function show_map(current_data) {
 
     update_data();
-    var retention_countries = Object.keys(retention_data.bachelor[institution_type]);
+    var retention_countries = Object.keys(structuredClone(retention_data.bachelor[institution_type]));
     var europe_uni_filtered = structuredClone(europe_geo);
+
+
+
+    var    data_min = 2;
+var        data_max = -1;
+
+    for (let i in current_countries) {
+       var data = retention_data.bachelor[institution_type][current_countries[i]];
+       data = data.filter(item => {
+                                                            return item[current_gender] > 0 && item[current_gender] < 1
+                                                            });
+
+    var local_min = Math.min(...data.map(item => item[current_gender]));
+        var local_max = Math.max(...data.map(item => item[current_gender]));
+        if (local_max > data_max) data_max = local_max;
+        if (local_min < data_min) data_min = local_min;
+
+    }
+
+    data_min -= 0.1
 
     /* filtering the geometries of European countries in the `europe_uni_filtered` object based on whether
     the country name is included in the `retention_countries` array. */
@@ -196,8 +220,8 @@ function show_map(current_data) {
       "name": "color",
       "type": "ordinal",
       "nice": true,
-      "domain": [0, 0.5, 0.7, 0.99, 1.01],
-      "range": [ "rgba(50, 50, 50, 0.5)", "rgba(70,130,180, 0.5)", "rgba(70,130,180, 0.7)", "rgba(70,130,180, 0.99)",  "rgb(170, 57, 57, 0.5)"]
+      "domain": [0, data_min +0.1, data_min+ 0.2, 0.99, 1.01],
+      "range": [ "rgba(50, 50, 50, 0.5)", "rgba(70,130,180, 0.35)", "rgba(70,130,180, 0.7)", "rgba(70,130,180, 0.99)",  "rgb(170, 57, 57, 0.5)"]
     }
   ],
 

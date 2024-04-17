@@ -4,16 +4,6 @@ function show_bar(current_data, current_gender, institution_type_label) {
 
     try {
 
-//        todo checking the data for emptiness
-    current_data.values = current_data.values.filter(item => {
-    return item[current_gender] > 0 && item[current_gender] < 1
-    });
-
-    //        todo checking the data for emptiness
-    if (current_data.values.length == 0)
-        current_data =  { "name": current_country + " (outliers)", "values": retention_data.bachelor[institution_type][current_country]};
-
-
     /*  calculating the minimum value and adds magic 0,01 delta to view min value */
     data_min = (Math.min(...current_data.values.map(item => item[current_gender])) - 0.1).toFixed(1);
 
@@ -47,7 +37,7 @@ function show_bar(current_data, current_gender, institution_type_label) {
     {
       "name": "yscale",
       "type": "band",
-      "domain": {"data": current_data.name, "field": "year"},
+      "domain": {"data": "countrydata", "field": "year"},
       "range": "height",
       "padding": 0.2,
       "nice": true
@@ -55,7 +45,7 @@ function show_bar(current_data, current_gender, institution_type_label) {
     {
       "name": "xscale",
       "type": "linear",
-      "domain": {"data": current_data.name, "field": current_gender},
+      "domain": {"data": "countrydata", "field": current_gender},
       "range": "width",
    "domainMin": data_min,
       "nice": true
@@ -63,7 +53,7 @@ function show_bar(current_data, current_gender, institution_type_label) {
     {
       "name": "color",
       "type": "ordinal",
-      "domain": {"data": current_data.name, "field": "category"},
+      "domain": {"data": "countrydata", "field": "category"},
       "range": {"scheme": "category20"}
 
     },
@@ -88,7 +78,7 @@ function show_bar(current_data, current_gender, institution_type_label) {
 
       "from": {
         "facet": {
-          "data": current_data.name,
+          "data": "countrydata",
           "name": "facet",
           "groupby": "year"
         }

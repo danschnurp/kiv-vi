@@ -25,6 +25,9 @@
 
 
 <br>
+                                    <p>Select one country to view chart details on <b>double click</b>. So you can zoom with mousewheel and
+                  scroll the map.
+                The countries with 0% retention have no data for selected year and gender, but they can be selected.  </p>
     </div>
     <div class="row">
 
@@ -57,8 +60,11 @@
             <option value="female">Female</option>
             <option value="male">Male</option>
     </select>
-   </div>
 
+   </div>
+        <div class="col">
+               <button id="selected_countries" class="btn btn-secondary" > Clear Selected</button>
+        </div>
 
 
 
@@ -67,34 +73,19 @@
      <div class="row">
           <div class="col">
 
+
+
+    <div  class="border" id="vis"></div>
+
                             <div  class="border" id="linevis"></div>
                        <br>
                        <br>
-
-    <div  class="border" id="vis"></div>
-              <p>Select one country to view chart details on <b>double click</b>.
-                The countries with 0% retention have no data for selected year and gender, but they can be selected.  </p>
           </div>
                    <div class="col">
            <div class="col">
-               <label> choose countries order to compare:</label>
-               <br>
-             <div>
-         <input type="radio" id="current_data" name="country_order" value="current_data" checked>
-  <label id="country" for="current_data">1.</label>
-             </div>
-                  <div>
-               <input type="radio" id="current_data2" name="country_order" value="current_data2">
-  <label id="country2" for="current_data2">2.</label>
-</div>
-                  <div>
-                              <input type="radio" id="current_data3" name="country_order" value="current_data3">
-  <label id="country3" for="current_data3">3.</label>
-</div>
-                  <div>
-               <input type="radio" id="current_data4" name="country_order" value="current_data4">
-  <label id="country4" for="current_data4">4.</label>
-                  </div>
+
+
+
            </div>
     <div  class="border" id="textvis"></div>
 <p> The data are filtered over non-empty and non-outlier years.</p>
