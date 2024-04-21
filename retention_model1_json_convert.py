@@ -1,14 +1,14 @@
 import pandas as pd
 import json
-
-import geopandas as gpd
-
+import argparse
 from jsonschema.validators import validate
 
-from io_utils import save_to_manual_vis
-from vega_lite_generator import generate_js
+parser = argparse.ArgumentParser(description='retention_model1_json_converter')
+parser.add_argument('-i', '--input_file_path', default="./data/Bachelor-Data-Retention-Graduation.xlsx")
 
-xls = pd.ExcelFile("./data/Bachelor-Data-Retention-Graduation.xlsx")
+args = parser.parse_args()
+
+xls = pd.ExcelFile(args.input_file_path)
 df = pd.read_excel(xls, "Retention-Rate model1", skiprows=1)
 
 # filtering the Data based on the values in the "Institution Type" column
@@ -51,35 +51,29 @@ data = {"RU": research_universities,
         "UAS": universities_applied_sciences,
         "RU+UAS": both_types}
 
+# performing a data validation step to ensure that all the countries present in the data extracted
+# from the Excel file (stored in the `countries_retention` set) are also present in the geographic data
 countries_retention = set(list(data["RU"].keys()) + list(data["UAS"].keys()) + list(data["RU+UAS"].keys()))
-
 with open("./europe_geo_data.json", "r") as f:
     country_coordinates = json.load(f)
-
 countries_mapped = set([i["properties"]["NAME"] for i in country_coordinates["objects"]["europe"]["geometries"]])
-
 assert len(countries_retention - countries_mapped) == 0
+
+with open("retention_schema.json", "r") as f:
+    schema = json.load(f)
 
 data = {"bachelor": data}
 
+# Validate the data against the schema
+try:
+    validate(instance=data, schema=schema)
+    print("Validation successful. The data conforms to the schema.")
+except Exception as e:
+    print("Validation failed. The data does not conform to the schema.")
+    print(e)
 
-save_to_manual_vis(data)
-#
-# import altair as alt
-#
-# pict_width = 600
-# pict_height = 500
-#
-# gdf_ne = gpd.read_file("./europe_geo_data.json", driver='TopoJSON')
-#
-#
-# europe_map: alt.vegalite.v5.api.Chart = alt.Chart(gdf_ne).mark_geoshape(
-#     fill='lightblue',
-#     stroke='white'
-# ).interactive()
-#
-#
-#
-#
-# generate_js(europe_map)
+with open('./static/js/retention_data.js', 'w', encoding='utf-8') as f:
+    f.write("var retention_data = ")
+    json.dump(data, f, ensure_ascii=False, indent=2)
 
+print("Data are saved to ./static/js/retention_data.js")

@@ -7,7 +7,7 @@ var current_countries = ["Czech Republic"];
 
 var current_data =  { "name": "Czech Republic", "values": structuredClone(retention_data).bachelor[institution_type]["Czech Republic"]};;
 var filtered_data = { "name": "Czech Republic", "values": structuredClone(retention_data).bachelor[institution_type]["Czech Republic"]};
-var current_gender = "total";
+var current_gender = "female";
 var current_year = 0;
 var current_year_label = 0;
 
