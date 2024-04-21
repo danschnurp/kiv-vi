@@ -152,20 +152,20 @@ function show_map(current_data) {
     var    data_min = 2;
 var        data_max = -1;
 
-    for (let i in current_countries) {
-       var data = retention_data.bachelor[institution_type][current_countries[i]];
-       data = data.filter(item => {
-                                                            return item[current_gender] > 0 && item[current_gender] < 1
-                                                            });
+    for (let i in retention_countries) {
+       var data = retention_data.bachelor[institution_type][retention_countries[i]];
+           if (data.length > 0) {
+               data = data.filter(item => {
+                                     return item[current_gender] > 0 && item[current_gender] < 1
+                                                                    });
 
-    var local_min = Math.min(...data.map(item => item[current_gender]));
-        var local_max = Math.max(...data.map(item => item[current_gender]));
-        if (local_max > data_max) data_max = local_max;
-        if (local_min < data_min) data_min = local_min;
-
+                var local_min = Math.min(...data.map(item => item[current_gender]));
+                var local_max = Math.max(...data.map(item => item[current_gender]));
+                if (local_max > data_max) data_max = local_max;
+                if (local_min < data_min) data_min = local_min;
+        }
     }
 
-    data_min -= 0.1
 
     /* filtering the geometries of European countries in the `europe_uni_filtered` object based on whether
     the country name is included in the `retention_countries` array. */
@@ -201,6 +201,8 @@ var        data_max = -1;
     var pict_width = 600;
     var pict_height = 500;
 
+    var delta = 0.2;
+
     var VSpec = {
 
   "$schema": "https://vega.github.io/schema/vega/v5.json",
@@ -224,7 +226,7 @@ var        data_max = -1;
       "name": "color",
       "type": "ordinal",
       "nice": true,
-      "domain": [0, data_min +0.1, data_min+ 0.2, 0.99, 1.01],
+      "domain": [0, data_min, data_min + delta , 0.99, 1.01],
       "range": [ "rgba(50, 50, 50, 0.5)", "rgba(70,130,180, 0.35)", "rgba(70,130,180, 0.7)", "rgba(70,130,180, 0.99)",  "rgb(170, 57, 57, 0.5)"]
     }
   ],
@@ -375,15 +377,23 @@ var        data_max = -1;
 
         "update": {
             "stroke": {"value": "white"},
-          "fill": {"signal": "1.0 < datum.properties.DATA." + current_gender + "  ? 'rgb(170, 57, 57)' : 0 === datum.properties.DATA." + current_gender + " ? 'rgb(50, 50, 50)': 'steelblue'"},
+                                    // is value > 1 ?
+          "fill": {"signal": "1.0 < datum.properties.DATA." + current_gender + "  ? "+
+               //   red                         is value zero ?
+          " 'rgb(170, 57, 57)' : 0 === datum.properties.DATA." + current_gender + " ? "+
+          //   gray
+          " 'rgb(50, 50, 50)': 'steelblue'"},
           "cursor": {"value": "pointer"},
-          "opacity": {"signal": "1.0 > datum.properties.DATA." + current_gender + " && datum.properties.DATA." + current_gender + " > 0.0 ? ( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + ":  0.5" }
+                                         // is value in 0,1 interval?
+          "opacity": {"signal": "1.0 >  datum.properties.DATA." + current_gender +
+          " && datum.properties.DATA." + current_gender + " > 0.0 ? "+
+
+          " ( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "+"  + delta + " :  0.5" }
         },
         "hover": {
           "tooltip": {
             "signal":
-  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'scaled':( datum.properties.DATA." +
-  current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "  , 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
+  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'scaled':( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "+"  + delta + " , 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
           },
            "fill": {"value": "lightblue"},
         },
