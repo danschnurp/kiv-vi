@@ -226,8 +226,8 @@ var        data_max = -1;
       "name": "color",
       "type": "ordinal",
       "nice": true,
-      "domain": [0, data_min, data_min + delta , 0.99, 1.01],
-      "range": [ "rgba(50, 50, 50, 0.5)", "rgba(70,130,180, 0.35)", "rgba(70,130,180, 0.7)", "rgba(70,130,180, 0.99)",  "rgb(170, 57, 57, 0.5)"]
+      "domain": [0, data_min, (data_min + data_max) / 2 , data_max, 1.01],
+      "range": [ "rgba(50, 50, 50, 0.5)", "rgba(70,130,180, 0.35)", "rgba(70,130,180, 0.7)", "rgba(70,130,180, 0.95)",  "rgb(170, 57, 57, 0.5)"]
     }
   ],
 
@@ -380,20 +380,20 @@ var        data_max = -1;
                                     // is value > 1 ?
           "fill": {"signal": "1.0 < datum.properties.DATA." + current_gender + "  ? "+
                //   red                         is value zero ?
-          " 'rgb(170, 57, 57)' : 0 === datum.properties.DATA." + current_gender + " ? "+
+          " 'rgb(206, 145, 145)' : 0 === datum.properties.DATA." + current_gender + " ? "+
           //   gray
-          " 'rgb(50, 50, 50)': 'steelblue'"},
+          " 'rgb(150, 150, 150)': 'steelblue'"},
           "cursor": {"value": "pointer"},
                                          // is value in 0,1 interval?
-          "opacity": {"signal": "1.0 >  datum.properties.DATA." + current_gender +
-          " && datum.properties.DATA." + current_gender + " > 0.0 ? "+
+          "opacity": {"signal": "1.0 >  ( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "+"  + delta +
+          " &&  ( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "+"  + delta + "  > 0.0 ? "+
 
-          " ( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "+"  + delta + " :  0.5" }
+          " ( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "+"  + delta + " :  1" }
         },
         "hover": {
           "tooltip": {
             "signal":
-  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year, 'scaled':( datum.properties.DATA." + current_gender + " - " + data_min + " ) / " + ( 1 - data_min) + "+"  + delta + " , 'male+female': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
+  "{'Name': datum.properties.NAME, 'year': datum.properties.DATA.year,  'total': datum.properties.DATA.total, 'male': datum.properties.DATA.male, 'female': datum.properties.DATA.female }"
           },
            "fill": {"value": "lightblue"},
         },
