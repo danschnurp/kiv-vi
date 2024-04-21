@@ -54,14 +54,14 @@ function show_bar(current_data, current_gender, institution_type_label) {
       "name": "color",
       "type": "ordinal",
       "domain": {"data": "countrydata", "field": "category"},
-      "range": {"scheme": "category20"}
+      "range": {"scheme": "category10"}
 
     },
         {
       "name": "color_labels",
       "type": "ordinal",
       "domain": current_data.country_names,
-      "range": {"scheme": "category20"}
+      "range": {"scheme": "category10"}
 
     }
   ],
@@ -126,12 +126,12 @@ function show_bar(current_data, current_gender, institution_type_label) {
               "x": {"field": "x2", "offset": -5},
               "y": {"field": "y", "offset": {"field": "height", "mult": 0.5}},
               "fill": [
-                {"test": "contrast('white', datum.fill) > contrast('black', datum.fill)", "value": "rgba(255,255,255,0.5)"},
-                {"value": "rgba(0,0,0,0.5)"}
+                {"test": "contrast('white', datum.fill) > contrast('black', datum.fill)", "value": "rgba(255,255,255,1)"},
+                {"value": "rgba(0,0,0,1)"}
               ],
               "align": {"value": "right"},
               "baseline": {"value": "middle"},
-              "text": {"field": "datum." + current_gender},
+//              "text": {"field": "datum." + current_gender},
 
 
             }
