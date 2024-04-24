@@ -118,7 +118,6 @@ current_countries = ["Czech Republic"];
 
 /* event listener to the HTML element with the id "yearsRange". */
 document.getElementById("yearsRange").addEventListener("change", function() {
-current_countries = ["Czech Republic"];
     current_year = this.value;
     update_data();
     redraw_charts(current_data);
@@ -145,7 +144,6 @@ current_countries = ["Czech Republic"];
 /* displaying an interactive map of Europe */
 function show_map(current_data) {
 
-    update_data();
     var retention_countries = Object.keys(structuredClone(retention_data.bachelor[institution_type]));
     var europe_uni_filtered = structuredClone(europe_geo);
 

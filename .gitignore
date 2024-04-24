@@ -162,3 +162,5 @@ cython_debug/
 .Rproj.user
 .idea
 /static/js/generated_map.js
+.vscode/
+.DS_store

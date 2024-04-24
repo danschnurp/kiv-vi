@@ -27,8 +27,8 @@ def generate_json(dataframe):
         #  extracting the country name from the 'COUNTRY' column
         country = row['COUNTRY'][row['COUNTRY'].find(") ") + 2:]
 
-        if country == 'Czech Republic ':
-            country = 'Czech Republic'
+        if country[-1] == ' ':
+            country = country[:-1]
         elif country == 'UK':
             country = 'United Kingdom'
 
