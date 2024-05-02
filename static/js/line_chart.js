@@ -45,12 +45,12 @@ var linevis = {
       "type": "ordinal",
       "range": "category",
       "domain": {"data": "countrydata", "field": "category"},
-           "range": {"scheme": "category20"}
+           "range": {"scheme": "category10"}
     },        {
       "name": "color_labels",
       "type": "ordinal",
       "domain": current_data.country_names,
-      "range": {"scheme": "category20"}
+      "range": {"scheme": "category10"}
 
     }
   ],

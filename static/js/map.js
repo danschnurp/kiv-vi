@@ -89,8 +89,13 @@ document.getElementById("vis").addEventListener("dblclick", function(e) {
 //        if (e.shiftKey)
 
         if (current_countries.length < 7) {
-                current_countries = new Set(current_countries);
-        current_countries.add(selected_country);
+          var duplicity = current_countries.filter((item) => item === selected_country);
+          current_countries = new Set(current_countries);
+          if (duplicity.length > 0)  current_countries.delete(duplicity[0]);
+          else current_countries.add(selected_country);
+
+                
+
         current_countries = Array.from(current_countries);
 
 
@@ -228,6 +233,14 @@ var        data_max = -1;
       "nice": true,
       "domain": [0, data_min, (data_min + data_max) / 2 , data_max, 1.01],
       "range": [ "rgba(50, 50, 50, 0.5)", "rgba(70,130,180, 0.35)", "rgba(70,130,180, 0.7)", "rgba(70,130,180, 0.95)",  "rgb(170, 57, 57, 0.5)"]
+    },
+
+    {
+      "name": "main_description",
+      "type": "ordinal",
+      "nice": true,
+      "domain": [],
+      "range": [ ]
     }
   ],
 
@@ -238,9 +251,15 @@ var        data_max = -1;
  "fillColor": "rgba(255,255,255,0.5)",
       "fill": "color",
       "orient": "bottom-right",
-      "title": current_gender + " rates",
+      "title": titleCase(current_gender) + " Rates",
       "format": "0.1%"
     },
+    {
+      "title": "0% missing data, 101% is outlier", 
+      "fill": "main_description",
+      "orient": "bottom-left",
+  
+  }
 
   ],
 

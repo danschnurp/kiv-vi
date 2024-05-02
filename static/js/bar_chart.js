@@ -20,17 +20,22 @@ function show_bar(current_data, current_gender, institution_type_label) {
 
 
      "title": {
-         "text": titleCase(current_gender) + " Retention Rates",
-          "subtitle": institution_type_label + " Starting from Minimum Value",
-         "fontSize": 25,
-         "subtitleFontSize": 15
+         "text": "  Retention Rates in Informatics Studies across European Countries  ",
+          "subtitle": institution_type_label + " Starting from Minimum Value over non-empty and non-outlier years." ,
+         "fontSize": 15,
+         "subtitleFontSize": 13,
+         "padding": 20
          },
 
       "data": [
        current_data
       ],
   "legends": [
-    {"fill": "color_labels", "offset": 0, "zindex": 1}
+
+    {"fill": "color_labels", 
+    "padding": 2,
+    "title": "" + titleCase(current_gender) + " Rates",
+    "offset": 0, "zindex": 1}
   ],
 
     "scales": [
@@ -54,14 +59,14 @@ function show_bar(current_data, current_gender, institution_type_label) {
       "name": "color",
       "type": "ordinal",
       "domain": {"data": "countrydata", "field": "category"},
-      "range": {"scheme": "category10"}
+      "range": {"scheme": "category20"}
 
     },
         {
       "name": "color_labels",
       "type": "ordinal",
       "domain": current_data.country_names,
-      "range": {"scheme": "category10"}
+      "range": {"scheme": "category20"}
 
     }
   ],
@@ -131,9 +136,8 @@ function show_bar(current_data, current_gender, institution_type_label) {
               ],
               "align": {"value": "right"},
               "baseline": {"value": "middle"},
-//              "text": {"field": "datum." + current_gender},
-
-
+             "text": [
+              {"test": current_data.country_names.length + " < '4'", "field": "datum." + current_gender},]
             }
           }
         }
