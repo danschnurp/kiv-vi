@@ -88,11 +88,10 @@ document.getElementById("vis").addEventListener("dblclick", function(e) {
         selected_country = selected_country[0].innerHTML;
 //        if (e.shiftKey)
 
-        if (current_countries.length < 7) {
           var duplicity = current_countries.filter((item) => item === selected_country);
           current_countries = new Set(current_countries);
           if (duplicity.length > 0)  current_countries.delete(duplicity[0]);
-          else current_countries.add(selected_country);
+          else  if (Array.from(current_countries).length < 7)  current_countries.add(selected_country);
 
                 
 
@@ -101,7 +100,7 @@ document.getElementById("vis").addEventListener("dblclick", function(e) {
 
         update_data();
         redraw_charts(current_data);
-           }
+  
 
 });
 
