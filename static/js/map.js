@@ -75,6 +75,8 @@ function redraw_charts(current_data) {
 
     show_line(structuredClone(current_data), current_gender, institution_type_label);
 
+    show_ribbon(structuredClone(current_data), current_gender, institution_type_label);
+
     show_bar(structuredClone(filtered_data), current_gender, institution_type_label);
 
 
