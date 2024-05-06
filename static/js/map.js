@@ -76,6 +76,8 @@ function redraw_charts(current_data) {
     show_line(structuredClone(current_data), current_gender, institution_type_label);
 
     show_ribbon(structuredClone(current_data), current_gender, institution_type_label);
+    
+    show_bar_genders(structuredClone(filtered_data), current_gender, institution_type_label);
 
     show_bar(structuredClone(filtered_data), current_gender, institution_type_label);
 
@@ -116,7 +118,16 @@ document.getElementById("selected_countries").addEventListener("click", function
 /* event listener to the HTML element with the id "gender". */
 document.getElementById("gender").addEventListener("change", function() {
 current_countries = ["Czech Republic"];
+    if (this.value === "male_vs_female") {
+      current_gender = "total";
+      document.getElementById("textvis_genders").hidden = false;
+      document.getElementById("textvis").hidden = true;
+    }
+    else {
     current_gender = this.value;
+    document.getElementById("textvis_genders").hidden = true;
+    document.getElementById("textvis").hidden = false;
+    }
     update_data();
     redraw_charts(current_data);
     show_map(current_data);

@@ -68,6 +68,7 @@ Select a country to add / remove chart details with <b>double click</b>. So you 
         <option value="total" >Total</option>
             <option value="female" selected>Female</option>
             <option value="male">Male</option>
+            <option value="male_vs_female">Male, Female differences</option>
     </select>
 
    </div>
@@ -97,12 +98,15 @@ Select a country to add / remove chart details with <b>double click</b>. So you 
 
            </div>
     <div  class="border" id="textvis"></div>
-<p> The data are filtered over non-empty and non-outlier years.</p>
+    <div  class="border" id="textvis_genders" hidden></div>
+</div>
+
                    </div>
      </div>
      <div class="row">
         <div  class="border" id="ribbonvis"></div>
         </div>
+
 
 
 
@@ -121,6 +125,8 @@ Select a country to add / remove chart details with <b>double click</b>. So you 
     <script type="text/javascript" src="./static/js/retention_data.js">
     </script>
     <script type="text/javascript" src="./static/js/bar_chart.js">
+    </script>
+    <script type="text/javascript" src="./static/js/bar_chart_genders.js">
     </script>
     <script type="text/javascript" src="./static/js/line_chart.js">
             </script>

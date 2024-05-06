@@ -14,8 +14,8 @@ var linevis = {
 
 
  "title": {
-     "text":  titleCase(current_gender) + " Retention Rates ",
-        "subtitle": institution_type_label + " Over All Years",
+     "text":   titleCase(current_gender) + " Retention Rates ",
+        "subtitle": "Participation trends in " + institution_type_label + " Over All Years",
      "fontSize": 15,
      "subtitleFontSize": 10
      },
@@ -45,12 +45,13 @@ var linevis = {
       "type": "ordinal",
       "range": "category",
       "domain": {"data": "countrydata", "field": "category"},
-           "range": {"scheme": "category10"}
+           "range": [ "#4E79A7 ", "#F28E2B ", "#E15759 ", "#76B7B2 ", "#59A14F ", "#EDC948 ", "#B07AA1 ", "#FF9DA7 ", "#9C755F ", "#BAB0AC "],
+          
     },        {
       "name": "color_labels",
       "type": "ordinal",
       "domain": current_data.country_names,
-      "range": {"scheme": "category10"}
+      "range": [ "#4E79A7 ", "#F28E2B ", "#E15759 ", "#76B7B2 ", "#59A14F ", "#EDC948 ", "#B07AA1 ", "#FF9DA7 ", "#9C755F ", "#BAB0AC "],
 
     }
   ],

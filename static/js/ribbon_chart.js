@@ -13,7 +13,7 @@ function show_ribbon(current_data, current_gender, institution_type_label) {
     
       "title": {
         "text": "  Retention Rates in Informatics Studies across European Countries  ",
-         "subtitle": institution_type_label + " over all years." ,
+         "subtitle":  "Relative trends in " + institution_type_label + " over all years." ,
         "fontSize": 15,
         "subtitleFontSize": 13,
         "padding": 20
@@ -39,7 +39,7 @@ function show_ribbon(current_data, current_gender, institution_type_label) {
           "title": null
         },
         "y": {
-          "field": "total",  
+          "field": current_gender,  
           "type": "ordinal",
      
           "axis": {"domain": false, "grid": false, "ticks": false, "labels": false},
@@ -50,28 +50,28 @@ function show_ribbon(current_data, current_gender, institution_type_label) {
           "title": null,
           "field": "country_name",
           "type": "nominal",
+          "labelFontSize": 12,
+          "title": "" + titleCase(current_gender) + " Rates",
+          "rowPadding": 12,
           "scale": {"range": [ "#4E79A7 ", "#F28E2B ", "#E15759 ", "#76B7B2 ", "#59A14F ", "#EDC948 ", "#B07AA1 ", "#FF9DA7 ", "#9C755F ", "#BAB0AC "]},
           "legend": {
             "padding": 0,
-            "labelFontSize": 12,
-            "title": "" + titleCase(current_gender) + " Rates",
-            "rowPadding": 12,
-            "symbolOpacity": 0.6,
-            "symbolType": "square"
+            // "symbolOpacity": 0.6,
+            // "symbolType": "square"
           }
         },
-        "order": {"field": "total",   "type": "quantitative" },
+        "order": {"field": current_gender,   "type": "quantitative" },
         "tooltip": [
           {"field": "year", "type": "nominal", "title": "year"},
           {"field": "country_name", "type": "nominal", "title": "Type"},
-          {"field": "total", "format": "0.1%",  "type": "quantitative", "title": "Value"}
+          {"field": current_gender, "format": "0.1%",  "type": "quantitative", "title": "Value"}
         ]
       },
       "layer": [
         {
           "transform": [
             {
-              "window": [{"op": "sum", "field": "total",   "as": "sumx"}],
+              "window": [{"op": "sum", "field": current_gender,   "as": "sumx"}],
               "groupby": ["year", "type"]
             }
           ],
@@ -85,7 +85,7 @@ function show_ribbon(current_data, current_gender, institution_type_label) {
             "x": {"field": "year", "type": "nominal"},
             "order": {
               "aggregate": "max",
-              "field": "total",  
+              "field": current_gender,  
               "type": "quantitative"
             }
           }
@@ -93,7 +93,7 @@ function show_ribbon(current_data, current_gender, institution_type_label) {
         {
           "transform": [
             {
-              "window": [{"op": "sum", "field": "total",   "as": "sum"}],
+              "window": [{"op": "sum", "field": current_gender,   "as": "sum"}],
               "groupby": ["year", "type"]
             }
           ],
@@ -108,7 +108,7 @@ function show_ribbon(current_data, current_gender, institution_type_label) {
             "detail": {"field": "country_name", "type": "nominal"},
             "order": {
               "aggregate": "max",
-              "field": "total",  
+              "field": current_gender,  
               "type": "quantitative"
             }
           }
@@ -117,7 +117,7 @@ function show_ribbon(current_data, current_gender, institution_type_label) {
     
            "transform": [
             {
-              "window": [{"op": "sum", "field": "total",   "as": "sum"}],
+              "window": [{"op": "sum", "field": current_gender,   "as": "sum"}],
               "groupby": ["year", "type"]
             }
           ],
@@ -126,7 +126,7 @@ function show_ribbon(current_data, current_gender, institution_type_label) {
           "encoding": {
             "x": {"field": "year", "type": "nominal"},
             "y": {"field": "sum",   "type": "quantitative", "stack": "center"},
-            "text": {"field": "total", "format": "0.1%",  "type": "quantitative"},
+            "text": {"field": current_gender, "format": "0.1%",  "type": "quantitative"},
             "color": {"value": "rgba(0,0,0,0.8)"},
             "opacity": {"condition": {"param": "click", "value": 1}, "value": 0.2}
           }
