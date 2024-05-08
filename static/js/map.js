@@ -17,6 +17,45 @@ function titleCase(string){
   return string[0].toUpperCase() + string.slice(1).toLowerCase();
 }
 
+
+/**
+ * The function `filter_non_outlier_data` filters data based on a specified gender value range and
+ * returns the filtered country names and values.
+ * @param gender - The function `filter_non_outlier_data` takes a gender parameter to filter data based
+ * on the specified gender. It loops through the `current_countries` array and filters the data for a
+ * bar chart based on the gender values falling between 0 and 1. If the filtered data has any items,
+ * @returns The function `filter_non_outlier_data` is returning an object with the following
+ * properties:
+ * - "name": "countrydata"
+ * - "country_names": an array containing the names of countries that meet the filtering criteria
+ * - "values": an array containing the data values that meet the filtering criteria
+ */
+function filter_non_outlier_data(gender) {
+
+  var data_values_filtered = [];
+  var data_names_filtered = [];
+
+  for (let i in current_countries) {
+
+      // filtered for barchart
+      var temp_data = [];
+      retention_data.bachelor[institution_type][current_countries[i]].forEach(item => temp_data.push(item));
+
+      temp_data = structuredClone(retention_data.bachelor[institution_type][current_countries[i]]).filter(item => {
+                                                          return item[gender] > 0 && item[gender] < 1
+                                                      });
+      if (temp_data.length > 0) {
+          temp_data.forEach(item => data_values_filtered.push(item));
+          data_names_filtered.push(current_countries[i]);
+          }
+  }
+ return structuredClone({ "name": "countrydata",
+  "country_names": data_names_filtered,
+    "values": data_values_filtered
+    });
+
+}
+
 /**
  * The function `update_data` retrieves and processes data for a specific country, institution type, and gender,
  * calculating the minimum and maximum values.
@@ -24,9 +63,7 @@ function titleCase(string){
 function update_data() {
 
         var data_values = [];
-        var data_values_filtered = [];
         var data_names = [];
-        var data_names_filtered = [];
 
 
         for (let i in current_countries) {
@@ -34,26 +71,9 @@ function update_data() {
             retention_data.bachelor[institution_type][current_countries[i]].forEach(item => data_values.push(item));
             data_names.push( structuredClone(current_countries[i]));
 
-            // filtered for barchart
-            var temp_data = [];
-            retention_data.bachelor[institution_type][current_countries[i]].forEach(item => temp_data.push(item));
+         }
 
-            temp_data = structuredClone(retention_data.bachelor[institution_type][current_countries[i]]).filter(item => {
-                                                                return item[current_gender] > 0 && item[current_gender] < 1
-                                                            });
-
-
-
-            if (temp_data.length > 0) {
-                temp_data.forEach(item => data_values_filtered.push(item));
-                data_names_filtered.push(current_countries[i]);
-                }
-        }
-
-       filtered_data = { "name": "countrydata",
-        "country_names": data_names_filtered,
-          "values": data_values_filtered
-          };
+       filtered_data = filter_non_outlier_data(current_gender);
 
        current_data =  { "name": "countrydata",
         "country_names":  structuredClone(data_names),
@@ -63,6 +83,21 @@ function update_data() {
 
 
     }
+
+
+
+  function prepare_data_genders() {
+    if (document.getElementById("gender").value !== "male_vs_female") return {};
+    // console.log("prepraring data for male vs female comparision");
+
+    var female_data_filtered = filter_non_outlier_data("female");
+    var male_data_filtered = filter_non_outlier_data("male");
+    female_data_filtered["country_names"].concat(male_data_filtered["country_names"]);
+    female_data_filtered["values"].concat(male_data_filtered["values"]);
+      return female_data_filtered;
+
+
+  }
 
 
 /**
@@ -77,7 +112,7 @@ function redraw_charts(current_data) {
 
     show_ribbon(structuredClone(current_data), current_gender, institution_type_label);
     
-    show_bar_genders(structuredClone(filtered_data), current_gender, institution_type_label);
+    show_bar_genders(structuredClone(prepare_data_genders()), current_gender, institution_type_label);
 
     show_bar(structuredClone(filtered_data), current_gender, institution_type_label);
 
