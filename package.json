@@ -1,0 +1,17 @@
+{
+  "name": "kiv-vi",
+  "version": "1.0.0",
+  "description": "It features an interactive map displaying retention rates, allowing users to explore data by hovering over each country. Additionally, there are two dynamic charts providing further insights into retention trends. Overall, the visualization offers a comprehensive view of informatics study retention across Europe, facilitating easy comparison and analysis.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Schnurpfeil",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "vega": "^5.28.0",
+    "vega-embed": "^6.25.0",
+    "vega-lite": "^5.18.0"
+  }
+}

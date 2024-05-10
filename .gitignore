@@ -164,3 +164,4 @@ cython_debug/
 /static/js/generated_map.js
 .vscode/
 .DS_store
+node_modules/*
