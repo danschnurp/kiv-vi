@@ -11,6 +11,9 @@ var current_gender = "female";
 var current_year = 0;
 var current_year_label = 0;
 
+var pict_width = 600;
+var pict_height = 500;
+
 document.getElementById("yearsRange").max = structuredClone(retention_data).bachelor[institution_type]["Czech Republic"].length - 1;
 
 function titleCase(string){
@@ -87,7 +90,7 @@ function update_data() {
 
 
   function prepare_data_genders() {
-    if (document.getElementById("gender").value !== "male_vs_female") return {};
+    if (document.getElementById("gender").value !== "male_vs_female") return null;
     // console.log("prepraring data for male vs female comparision");
 
     var female_data_filtered = filter_non_outlier_data("female");
@@ -108,14 +111,20 @@ function update_data() {
  */
 function redraw_charts(current_data) {
 
-    show_line(structuredClone(current_data), current_gender, institution_type_label);
+  
+  var data_genders = prepare_data_genders();
 
-    show_ribbon(structuredClone(current_data), current_gender, institution_type_label);
-    
-    show_bar_genders(structuredClone(prepare_data_genders()), current_gender, institution_type_label);
+  if (data_genders != null) {
 
+    show_line_genders(current_data, current_gender, institution_type_label);
+    show_bar_genders(data_genders, current_gender, institution_type_label);
+
+  }
+  else {
+    show_line(current_data, current_gender, institution_type_label);
+    // show_ribbon(structuredClone(current_data), current_gender, institution_type_label);
     show_bar(structuredClone(filtered_data), current_gender, institution_type_label);
-
+  }
 
 };
 
@@ -155,13 +164,9 @@ document.getElementById("gender").addEventListener("change", function() {
 current_countries = ["Czech Republic"];
     if (this.value === "male_vs_female") {
       current_gender = "total";
-      document.getElementById("textvis_genders").hidden = false;
-      document.getElementById("textvis").hidden = true;
     }
     else {
     current_gender = this.value;
-    document.getElementById("textvis_genders").hidden = true;
-    document.getElementById("textvis").hidden = false;
     }
     update_data();
     redraw_charts(current_data);
@@ -250,8 +255,6 @@ var        data_max = -1;
     document.getElementById("start_years_range").innerHTML = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[0].properties.NAME][0]["year"];
     document.getElementById("end_years_range").innerHTML = retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[0].properties.NAME][retention_data.bachelor[institution_type][europe_uni_filtered.objects.europe.geometries[0].properties.NAME].length - 1]["year"];
 
-    var pict_width = 600;
-    var pict_height = 500;
 
     var delta = 0.2;
 

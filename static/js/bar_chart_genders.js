@@ -15,7 +15,7 @@ function show_bar_genders(current_data, current_gender, institution_type_label) 
     {
       "$schema": "https://vega.github.io/schema/vega/v5.json",
       "width": 555,
-      "height": 630,
+      "height": 850,
       "padding": 5,
       "autosize": "fit",
           "background": "white",
@@ -30,7 +30,18 @@ function show_bar_genders(current_data, current_gender, institution_type_label) 
          },
 
       "data": [
-       current_data
+       current_data,
+       {
+        "name": "male_vs_female",
+        "source": "countrydata",
+        "transform": [
+          {
+            "type": "fold",
+            "fields": ["female", "male"],
+            "as": ["gender", "retention"]
+          }
+        ]
+      }
       ],
   "legends": [
 
@@ -58,7 +69,7 @@ function show_bar_genders(current_data, current_gender, institution_type_label) 
     {
       "name": "xscale",
       "type": "linear",
-      "domain": {"data": "countrydata", "field": "male"},
+      "domain": {"data": "male_vs_female", "field": "retention"},
       "range": "width",
    "domainMin": data_min,
       "nice": true
@@ -161,13 +172,13 @@ function show_bar_genders(current_data, current_gender, institution_type_label) 
     }
   ]
     }
-  vegaEmbed('#textvis_genders', textvis);
+  vegaEmbed('#textvis', textvis);
 
 
       }
     catch(err) {
     textvis = {}
-  vegaEmbed('#textvis_genders', textvis);
+  vegaEmbed('#textvis', textvis);
     }
 
 }

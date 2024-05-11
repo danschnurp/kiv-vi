@@ -13,7 +13,7 @@ function show_bar(current_data, current_gender, institution_type_label) {
     {
       "$schema": "https://vega.github.io/schema/vega/v5.json",
       "width": 555,
-      "height": 630,
+      "height": 850,
       "padding": 5,
       "autosize": "fit",
           "background": "white",
