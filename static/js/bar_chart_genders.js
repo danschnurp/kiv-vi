@@ -46,12 +46,13 @@ function show_bar_genders(current_data, current_gender, institution_type_label) 
   "legends": [
 
     {"fill": "color_labels", 
-   
+    "fillOpacity": {"value": 0.5},
     "padding": 2,
     "title": "Male"  + " Rates",
     "offset": 0, "zindex": 1},
 
     {"fill": "color_labels2", 
+         "fillOpacity": {"value": 0.5},
     "padding": 2,
     "title": "Female"  + " Rates",
     "offset": 0, "zindex": 1}
@@ -149,7 +150,9 @@ function show_bar_genders(current_data, current_gender, institution_type_label) 
               "x": {"scale": "xscale", "field": "female"},
               "x2": {"scale": "xscale", "value": data_min},
               "fill": {"scale": "color", "field": "category"},
-              "fillOpacity": {"value": 0.5}
+              "fillOpacity": {"value": 0.5},
+              "stroke": {"value": "gray"},
+
             }
           }
         },
