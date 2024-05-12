@@ -129,12 +129,12 @@ function redraw_charts(current_data) {
 };
 
 /* choosing the country for charts */
-document.getElementById("vis").addEventListener("dblclick", function(e) {
+document.getElementById("vis").addEventListener("click", function(e) {
 
-
+  if (e.shiftKey) {
         var selected_country = document.getElementById("vg-tooltip-element").getElementsByClassName("value");
         selected_country = selected_country[0].innerHTML;
-//        if (e.shiftKey)
+
 
           var duplicity = current_countries.filter((item) => item === selected_country);
           current_countries = new Set(current_countries);
@@ -148,7 +148,7 @@ document.getElementById("vis").addEventListener("dblclick", function(e) {
 
         update_data();
         redraw_charts(current_data);
-  
+  }
 
 });
 

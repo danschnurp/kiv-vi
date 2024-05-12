@@ -63,7 +63,7 @@ var linevis = {
 
   "axes": [
     {"orient": "bottom", "scale": "x"},
-    {"orient": "left", "scale": "y", "format": "0.1%"}
+    {"orient": "left", "scale": "y", "format": "0.1%", "grid": true}
   ],
 
   "marks": [
@@ -209,7 +209,7 @@ var linevis = {
   
   {"orient": "bottom", "scale": "x"},
 
-  {"orient": "left", "scale": "y", "format": "0.1%"}
+  {"orient": "left", "scale": "y", "format": "0.1%", "grid": true}
 ],
 
 "marks": [

@@ -1,146 +1,101 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title> Retention Rates in Informatics Studies in European Countries</title>
+    <title>Retention Rates in Informatics Studies in European Countries</title>
 
-        <!-- Link Bootstrap CSS -->
-        <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    
-
-
+    <!-- Link Bootstrap CSS -->
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container" >
-    <div class="container mt-5">
-        <h1> Retention Rates in Informatics Studies in European Countries</h1>
+    <div class="container">
+        <div class="container mt-5">
+            <h1>Retention Rates in Informatics Studies in European Countries</h1>
+            <p>Informatics programs are essential for Europe's technological advancement, but student retention rates can limit their impact. This study utilizes a data-driven approach to explore factors affecting retention rates across various European countries. We leverage interactive visualizations built on frameworks like Vega to analyze retention data gathered from national educational statistics, surveys, and institutional reports. This approach provides a dynamic platform for users to explore complex datasets, ultimately enabling a comprehensive picture of retention trends and disparities within European informatics education.</p>
 
-
-<br>    <p><b> Watch out!</b> Read instructions first.</p>
-<ul>
-
-<li>
-Select a country to add / remove chart details with <b>double click</b>. So you can zoom with mousewheel and
-                  scroll the map.
-</li>
-<li>
-    The countries with 0% retention have no data for selected year and gender, but they can be selected.  
-</li>
-</ul>
-                                
-                
+            <br>
+            <p><b>Watch out!</b> Read instructions first.</p>
+            <ul>
+                <li>Select a country to add/remove chart details with <b>shift + click</b>. So you can zoom with the mouse wheel and scroll the map.</li>
+                <li>The countries with 0% retention have no data for the selected year and gender, but they can be selected.</li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <span>
+                        <input type="range" class="form-range" min="0" max="20" value="0" step="1" id="yearsRange">
+                    </span>
+                    <span>
+                        <label id="start_years_range"></label>   
+                        <label for="yearsRange" class="form-label" id="yearsRangeLabel"></label>
+                        <label class="float-end" id="end_years_range"></label>
+                    </span>
+                </div>
+            </div>
+            <div class="col">
+                <select class="form-select" id="institution_type">
+                    <option value="RU+UAS">Both</option>
+                    <option value="UAS">Universities of Applied Sciences</option>
+                    <option value="RU" selected>Research Universities</option>
+                </select>
+            </div>
+            <div class="col">
+                <select class="form-select" id="gender">
+                    <option value="total">Total</option>
+                    <option value="female" selected>Female</option>
+                    <option value="male">Male</option>
+                    <option value="male_vs_female">Male, Female differences</option>
+                </select>
+            </div>
+            <div class="col">
+                <button id="selected_countries" class="btn btn-secondary">Clear All Selected</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="border" id="vis"></div>
+                <div class="border" id="linevis"></div>
+                <br>
+                <br>
+            </div>
+            <div class="col">
+                <div class="col"></div>
+                <div class="border" id="textvis"></div>
+                <div class="border" id="textvis_genders" hidden></div>
+            </div>
+        </div>
+        <h5>Research Universities (RU)</h5>
+        <p>These institutions primarily focus on academic research alongside teaching. They often offer a wide range of programs, including undergraduate, graduate, and doctoral studies, with an emphasis on theoretical knowledge and research contributions to various fields.</p>
+        <h5>Universities of Applied Sciences (UAS)</h5>
+        <p>Also known as vocational universities or polytechnics, these institutions provide more practical, skill-oriented education. Programs are designed to prepare students for specific careers, with a strong emphasis on hands-on learning, internships, and industry collaborations.</p>
+        <h5>Incomplete Data and Data Distortion Possibilities</h5>
+        <ul>
+            <li><strong>Zero Retention Rates:</strong> Countries showing 0% retention rates indicate a lack of available data for the selected year and gender. Despite this, they can still be selected for analysis.</li>
+            <li><strong>Data Distortion Possibilities:</strong> It's important to acknowledge the potential for data incompleteness or distortion, which can arise due to various factors such as reporting discrepancies, sampling biases, or methodological limitations. Interpret results with caution, considering the context and potential limitations of the data.</li>
+        </ul>
     </div>
-    <div class="row">
-
-        <div class="col">
-             <div class="row">
-                 <span>
-                 <input type="range" class="form-range" min="0" max="20" value="0" step="1" id="yearsRange">
-                     </span>
-<span>
-           <label id="start_years_range"></label>   <label for="yearsRange" class="form-label" id="yearsRangeLabel"></label>
-                 <label class="float-end" id="end_years_range"></label>
-</span>
-
-
-
-
-             </div>
-        </div>
-   <div class="col">
-        <select class="form-select" id="institution_type">
-        <option value="RU+UAS" >Both</option>
-            <option value="UAS">Universities of Applied Sciences</option>
-            <option value="RU" selected>Research Universities</option>
-    </select>
-   </div>
-
-                   <div class="col">
-        <select class="form-select" id="gender">
-        <option value="total" >Total</option>
-            <option value="female" selected>Female</option>
-            <option value="male">Male</option>
-            <option value="male_vs_female">Male, Female differences</option>
-    </select>
-
-   </div>
-        <div class="col">
-               <button id="selected_countries" class="btn btn-secondary" >Clear All Selected</button>
-        </div>
-
-
-
-
-    </div>
-     <div class="row">
-          <div class="col">
-
-
-
-    <div  class="border" id="vis"></div>
-
-                            <div  class="border" id="linevis"></div>
-                       <br>
-                       <br>
-          </div>
-                   <div class="col">
-           <div class="col">
-
-
-
-           </div>
-    <div  class="border" id="textvis"></div>
-    <div  class="border" id="textvis_genders" hidden></div>
-</div>
-
-                   </div>
-     </div>
-     <div class="row">
-        <div  class="border" id="ribbonvis"></div>
-        </div>
-
-
-
-
 </div>
 <br>
-
-
-
-<br>
-
 </body>
 
+<!-- Bootstrap JS -->
+<script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Link Vega JS -->
+<script type="text/javascript" src="./node_modules/vega/build/vega.min.js"></script>
+<!-- Link Vega Lite JS -->
+<script type="text/javascript" src="./node_modules/vega-lite/build/vega-lite.min.js"></script>
+<!-- Link Vega Embed JS -->
+<script type="text/javascript" src="./node_modules/vega-embed/build/vega-embed.min.js"></script>
 
-    <!-- Bootstrap CSS -->
-    <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Link Vega JS -->
-    <script type="text/javascript" src="./node_modules/vega/build/vega.min.js"></script>
-    <!-- Link Vega Lite JS -->
-    <script type="text/javascript" src="./node_modules/vega-lite/build/vega-lite.min.js"></script>
-    <!-- Link Vega Embed JS -->
-    <script type="text/javascript" src="./node_modules/vega-embed/build/vega-embed.min.js"></script>
-
-
-    <script type="text/javascript" src="./static/js/europe_geo_data.js">
-    </script>
-    <script type="text/javascript" src="./static/js/retention_data.js">
-    </script>
-    <script type="text/javascript" src="./static/js/bar_chart.js">
-    </script>
-    <script type="text/javascript" src="./static/js/bar_chart_genders.js">
-    </script>
-    <script type="text/javascript" src="./static/js/line_chart.js">
-            </script>
-    <script type="text/javascript" src="./static/js/ribbon_chart.js">
-    </script>
-    <script type="text/javascript" src="./static/js/map.js">
-    </script>
-
-
+<script type="text/javascript" src="./static/js/europe_geo_data.js"></script>
+<script type="text/javascript" src="./static/js/retention_data.js"></script>
+<script type="text/javascript" src="./static/js/bar_chart.js"></script>
+<script type="text/javascript" src="./static/js/bar_chart_genders.js"></script>
+<script type="text/javascript" src="./static/js/line_chart.js"></script>
+<script type="text/javascript" src="./static/js/ribbon_chart.js"></script>
+<script type="text/javascript" src="./static/js/map.js"></script>
 
 </html>

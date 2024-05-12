@@ -73,7 +73,7 @@ function show_bar(current_data, current_gender, institution_type_label) {
 
   "axes": [
     {"orient": "left", "scale": "yscale", "tickSize": 0, "labelPadding": 4, "zindex": 1},
-    {"orient": "top", "scale": "xscale", "format": "0.1%"},
+    {"orient": "top", "scale": "xscale", "format": "0.1%", "grid": true},
     {"orient": "bottom", "scale": "xscale", "format": "0.1%"}
   ],
 
