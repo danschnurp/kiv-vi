@@ -8,6 +8,7 @@
 
     <!-- Link Bootstrap CSS -->
     <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+         <link href="./static/css/slider.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -22,19 +23,9 @@
                 <li>The countries with 0% retention have no data for the selected year and gender, but they can be selected.</li>
             </ul>
         </div>
+        <div class="container mt-5">
         <div class="row">
-            <div class="col">
-                <div class="row">
-                    <span>
-                        <input type="range" class="form-range" min="0" max="20" value="0" step="1" id="yearsRange">
-                    </span>
-                    <span>
-                        <label id="start_years_range"></label>   
-                        <label for="yearsRange" class="form-label" id="yearsRangeLabel"></label>
-                        <label class="float-end" id="end_years_range"></label>
-                    </span>
-                </div>
-            </div>
+
             <div class="col">
                 <select class="form-select" id="institution_type">
                     <option value="RU+UAS">Both</option>
@@ -54,6 +45,48 @@
                 <button id="selected_countries" class="btn btn-secondary">Clear All Selected</button>
             </div>
         </div>
+        </div>
+
+
+
+                <div class="row">
+                           <div class="col">
+                    <span>
+                            <br>
+                        <input type="range" class="form-range" min="0" max="20" value="0"  id="yearsRange">
+                    </span>
+                    <span>
+                        <label id="start_years_range"></label>
+                        <label for="yearsRange" class="form-label" id="yearsRangeLabel"></label>
+                        <label class="float-end" id="end_years_range"></label>
+                    </span>
+                </div>
+
+
+                    <div class="col">
+                        <br>
+        <div class="range_container">
+    <div class="sliders_control">
+       <input id="fromSlider" class="rangeinput"   type="range" value="0" min="0" max="10"/>
+       <input id="toSlider" class="rangeinput"   type="range" value="10" min="0" max="10"/>
+
+
+        <div class="form_control " >
+      <div class="form_control_container" >
+          <div class="form_control_container__time" >Min</div>
+          <input class="form_control_container__time__input" type="number" id="fromInput" value="0" min="0" max="10" />
+        </div>
+        <div class="form_control_container" >
+          <div class="form_control_container__time" >Max</div>
+          <input class="form_control_container__time__input" type="number" id="toInput" value="10" min="0" max="10" />
+        </div>
+    </div>
+
+
+</div>
+
+        </div>
+            </div>
         <div class="row">
             <div class="col">
                 <div class="border" id="vis"></div>
@@ -89,6 +122,8 @@
 <script type="text/javascript" src="./node_modules/vega-lite/build/vega-lite.min.js"></script>
 <!-- Link Vega Embed JS -->
 <script type="text/javascript" src="./node_modules/vega-embed/build/vega-embed.min.js"></script>
+
+<script type="text/javascript" src="./static/js/slider.js"></script>
 
 <script type="text/javascript" src="./static/js/europe_geo_data.js"></script>
 <script type="text/javascript" src="./static/js/retention_data.js"></script>

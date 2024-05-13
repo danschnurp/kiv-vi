@@ -15,6 +15,10 @@ var pict_width = 600;
 var pict_height = 500;
 
 document.getElementById("yearsRange").max = structuredClone(retention_data).bachelor[institution_type]["Czech Republic"].length - 1;
+document.getElementsByClassName("rangeinput")[0].max = structuredClone(retention_data).bachelor[institution_type]["Czech Republic"].length - 1;
+document.getElementsByClassName("rangeinput")[1].max = structuredClone(retention_data).bachelor[institution_type]["Czech Republic"].length - 1;
+document.getElementsByClassName("rangeinput")[1].value = structuredClone(retention_data).bachelor[institution_type]["Czech Republic"].length - 1;
+
 
 function titleCase(string){
   return string[0].toUpperCase() + string.slice(1).toLowerCase();
@@ -37,6 +41,10 @@ function filter_non_outlier_data(gender) {
 
   var data_values_filtered = [];
   var data_names_filtered = [];
+
+      var fromSlider = document.getElementById("fromSlider").value;
+            var toSlider = document.getElementById("toSlider").value;
+            console.log(fromSlider)
 
   for (let i in current_countries) {
 
@@ -153,6 +161,18 @@ document.getElementById("vis").addEventListener("click", function(e) {
 });
 
 document.getElementById("selected_countries").addEventListener("click", function(e) {
+ current_countries = []
+         update_data();
+        redraw_charts(current_data);
+});
+
+document.getElementById("fromSlider").addEventListener("change", function(e) {
+ current_countries = []
+         update_data();
+        redraw_charts(current_data);
+});
+
+document.getElementById("toSlider").addEventListener("change", function(e) {
  current_countries = []
          update_data();
         redraw_charts(current_data);

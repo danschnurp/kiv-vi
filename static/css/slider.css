@@ -1,0 +1,62 @@
+.range_container {
+
+  flex-direction: column;
+  width: 80%;
+  margin: 10px;
+}
+
+.sliders_control {
+  position: relative;
+  min-height: 50px;
+}
+
+.form_control {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.rangeinput[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: all;
+
+  box-shadow: 0 0 0 1px #C6C6C6;
+  cursor: pointer;
+}
+
+.rangeinput[type=range]::-moz-range-thumb {
+  -webkit-appearance: none;
+  pointer-events: all;
+
+  box-shadow: 0 0 0 1px #C6C6C6;
+  cursor: pointer;
+}
+
+
+.rangeinput[type=range]::-webkit-slider-thumb:active {
+  box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+  -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+}
+
+
+
+.rangeinput[type=number]::-webkit-inner-spin-button,
+.rangeinput[type=number]::-webkit-outer-spin-button {
+   opacity: 1;
+}
+
+.rangeinput[type="range"] {
+  -webkit-appearance: none; 
+  appearance: none;
+  height: 2px;
+  width: 100%;
+  position: absolute;
+
+  pointer-events: none;
+}
+
+#fromSlider {
+  height: 0;
+  z-index: 1;
+}
