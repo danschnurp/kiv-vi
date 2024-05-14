@@ -18,7 +18,7 @@ pip install -r requirements.txt
 - run the modified script
 ```
 
-python retention_model1_json_convert.py -i  "./data/Bachelor-Data-Retention-Graduation.xlsx"
+python retention_model1_json_convert.py --model 2 -i  "./data/Bachelor-Data-Retention-Graduation.xlsx"
 ```
 
 data for visualization should match `./retention_schema.json` file.

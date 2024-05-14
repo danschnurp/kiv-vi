@@ -5,11 +5,12 @@ from jsonschema.validators import validate
 
 parser = argparse.ArgumentParser(description='retention_model1_json_converter')
 parser.add_argument('-i', '--input_file_path', default="./data/Bachelor-Data-Retention-Graduation.xlsx")
+parser.add_argument('-m', '--model', type=int, default=2)
 
 args = parser.parse_args()
 
 xls = pd.ExcelFile(args.input_file_path)
-df = pd.read_excel(xls, "Retention-Rate model1", skiprows=1)
+df = pd.read_excel(xls, f"Retention-Rate model{args.model}", skiprows=1)
 
 # filtering the Data based on the values in the "Institution Type" column
 research_universities = df[df["Institution Type"] == "(RU)"]
@@ -22,6 +23,7 @@ def generate_json(dataframe):
     processes a DataFrame to generate a JSON data structure containing information about
     countries, years, total values, female values, and male values.
     """
+    bad_list = ["nan", '#VALUE!']
     json_data = {}
     for index, row in dataframe.iterrows():
         #  extracting the country name from the 'COUNTRY' column
@@ -33,9 +35,9 @@ def generate_json(dataframe):
             country = 'United Kingdom'
 
         years = list(row[2::3].to_dict().keys())
-        total = list(row[2::3].astype(str).replace(to_replace=["nan"], value="0").astype(float).to_dict().values())
-        female = list(row[3::3].astype(str).replace(to_replace=["nan"], value="0").astype(float).to_dict().values())
-        male = list(row[4::3].astype(str).replace(to_replace=["nan"], value="0").astype(float).to_dict().values())
+        total = list(row[2::3].astype(str).replace(to_replace=bad_list, value="0").astype(float).to_dict().values())
+        female = list(row[3::3].astype(str).replace(to_replace=bad_list, value="0").astype(float).to_dict().values())
+        male = list(row[4::3].astype(str).replace(to_replace=bad_list, value="0").astype(float).to_dict().values())
 
         json_data[country] = [{"year": i, "total": j, "male": k, "female": l, "category": index, "country_name": country} for i, j, k, l in
                               zip(years, total, male, female)]
@@ -72,8 +74,8 @@ except Exception as e:
     print("Validation failed. The data does not conform to the schema.")
     print(e)
 
-with open('./static/js/retention_data.js', 'w', encoding='utf-8') as f:
+with open(f"./static/js/retention_model{args.model}.js", 'w', encoding='utf-8') as f:
     f.write("var retention_data = ")
     json.dump(data, f, ensure_ascii=False, indent=2)
 
-print("Data are saved to ./static/js/retention_data.js")
+print(f"Data are saved to ./static/js/retention_model{args.model}.js")

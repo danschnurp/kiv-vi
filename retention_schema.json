@@ -25,9 +25,10 @@
             "total": { "type": "number" },
             "male": { "type": "number" },
             "female": { "type": "number" },
-            "category": { "type": "integer" }
+            "category": { "type": "integer" },
+            "country_name": { "type": "string" }
           },
-          "required": ["year", "total", "male", "female", "category"]
+          "required": ["year", "total", "male", "female", "category", "country_name"]
         }
       }
     }
