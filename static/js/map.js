@@ -116,14 +116,14 @@ function redraw_charts(current_data) {
 
   if (data_genders != null) {
 
-    show_line_genders(current_data, current_gender, institution_type_label);
+    show_line_genders(data_genders, current_gender, institution_type_label);
     show_bar_genders(data_genders, current_gender, institution_type_label);
 
   }
   else {
-    show_line(current_data, current_gender, institution_type_label);
+    show_line(filtered_data, current_gender, institution_type_label);
     // show_ribbon(structuredClone(current_data), current_gender, institution_type_label);
-    show_bar(structuredClone(filtered_data), current_gender, institution_type_label);
+    show_bar(filtered_data, current_gender, institution_type_label);
   }
 
 };

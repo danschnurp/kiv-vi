@@ -2,6 +2,8 @@
 
 function show_line(current_data, current_gender, institution_type_label) {
 
+var     /*  calculating the minimum value and adds magic 0,01 delta to view min value */
+data_min = (Math.min(...current_data.values.map(item => item[current_gender])) - 0.05).toFixed(1);
 
 
 var linevis = {
@@ -36,6 +38,7 @@ var linevis = {
       "name": "y",
       "type": "linear",
       "range": "height",
+      "domainMin": data_min,
       "nice": true,
       "zero": true,
       "domain": {"data": "countrydata", "field": current_gender},
@@ -109,11 +112,11 @@ var linevis = {
 function show_line_genders(current_data, current_gender, institution_type_label) {
 
   /*  calculating the minimum value and adds magic 0,01 delta to view min value */
-  var data_min = Math.min( (Math.min(...current_data.values.map(item => item["male"])) - 0.1).toFixed(1),
-  (Math.min(...current_data.values.map(item => item["female"])) - 0.1).toFixed(1) );
-
-  var    data_max = Math.max( (Math.max(...current_data.values.map(item => item["male"])) + 0.01).toFixed(1),
-  (Math.max(...current_data.values.map(item => item["female"])) + 0.01).toFixed(1)  
+  var  data_min = Math.min( (Math.min(...current_data.values.map(item => item["male"])) - 0.05).toFixed(1),
+  (Math.min(...current_data.values.map(item => item["female"])) - 0.05).toFixed(1)  
+);
+  var    data_max = Math.max( (Math.max(...current_data.values.map(item => item["male"])) + 0.05).toFixed(1),
+  (Math.max(...current_data.values.map(item => item["female"])) + 0.05).toFixed(1)  
 );
 
 var linevis = {
@@ -160,6 +163,7 @@ var linevis = {
     "name": "y",
     "type": "linear",
     "range": "height",
+    "domainMin": data_min,
     "nice": true,
     "zero": true,
     "domain": {"data": "male_vs_female", "field": "retention"},
