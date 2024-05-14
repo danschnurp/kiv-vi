@@ -21,6 +21,49 @@ function titleCase(string){
 }
 
 
+// Function to sort the array by the "year" field and return indices
+function sortByYearAndGetIndices(data) {
+  // Create an array of indices before sorting
+  const indices = data.map((_, index) => index);
+  
+  // Using the sort method to sort the array by the "year" field
+  data.sort((a, b) => {
+      // Extracting the year from the "year" field and splitting it into two parts
+      const [aYearStart, aYearEnd] = a.year.split('/');
+      const [bYearStart, bYearEnd] = b.year.split('/');
+      
+      // Comparing the years
+      if (aYearStart !== bYearStart) {
+          return aYearStart - bYearStart;
+      } else {
+          // If the start years are equal, compare the end years
+          return aYearEnd - bYearEnd;
+      }
+  });
+
+  // Map the sorted data back to the original indices
+  const sortedIndices = data.map(item => indices[data.indexOf(item)]);
+
+  return sortedIndices;
+}
+
+// Function to sort array by the sorted indices
+function sortArrayByIndices(array, indices) {
+  // Create a copy of the original array
+  const sortedArray = [...array];
+  
+  // Rearrange elements based on the sorted indices
+  for (let i = 0; i < indices.length; i++) {
+      const newIndex = indices[i];
+      sortedArray[i] = array[newIndex];
+  }
+
+  return sortedArray.filter(function( element ) {
+    return element !== undefined;
+ });
+}
+
+
 /**
  * The function `filter_non_outlier_data` filters data based on a specified gender value range and
  * returns the filtered country names and values.
@@ -52,7 +95,14 @@ function filter_non_outlier_data(gender) {
           data_names_filtered.push(current_countries[i]);
           }
   }
- return structuredClone({ "name": "countrydata",
+
+
+  var indices = sortByYearAndGetIndices(data_values_filtered);
+  data_names_filtered = sortArrayByIndices(data_names_filtered, indices);
+  console.log(data_values_filtered);
+  data_names_filtered = sortArrayByIndices(data_names_filtered, indices);
+  console.log();
+  return structuredClone({ "name": "countrydata",
   "country_names": data_names_filtered,
     "values": data_values_filtered
     });

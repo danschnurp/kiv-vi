@@ -65,7 +65,7 @@ function show_bar(current_data, current_gender, institution_type_label) {
         {
       "name": "color_labels",
       "type": "ordinal",
-      "domain": current_data.country_names,
+      "domain": {"data": "countrydata", "field": "country_name"},
       "range": {"scheme": "category20"}
 
     }
@@ -114,13 +114,20 @@ function show_bar(current_data, current_gender, institution_type_label) {
           "from": {"data": "facet"},
           "type": "rect",
           "encode": {
-            "enter": {
+            "update": {
               "y": {"scale": "pos", "field": "category"},
               "height": {"scale": "pos", "band": 1},
               "x": {"scale": "xscale", "field": current_gender},
               "x2": {"scale": "xscale", "value": data_min},
               "fill": {"scale": "color", "field": "category"}
-            }
+            },
+            "hover": {
+              "tooltip": {
+                "signal":
+      "{'Country': datum.country_name, 'Retention': datum." + current_gender + " }"
+              },
+               "fill": {"value": "lightblue"},
+            },
           }
         },
         {

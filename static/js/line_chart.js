@@ -17,7 +17,7 @@ var linevis = {
 
  "title": {
      "text":   titleCase(current_gender) + " Retention Rates ",
-        "subtitle": "Participation trends in " + institution_type_label + " Over All Years",
+        "subtitle": "Participation trends in " + institution_type_label + " Starting from Minimum Value over non-empty and non-outlier years." ,
      "fontSize": 15,
      "subtitleFontSize": 10
      },
@@ -53,7 +53,7 @@ var linevis = {
     },        {
       "name": "color_labels",
       "type": "ordinal",
-      "domain": current_data.country_names,
+      "domain": {"data": "countrydata", "field": "country_name"},
       "range": [ "#4E79A7 ", "#F28E2B ", "#E15759 ", "#76B7B2 ", "#59A14F ", "#EDC948 ", "#B07AA1 ", "#FF9DA7 ", "#9C755F ", "#BAB0AC "],
 
     }
@@ -65,7 +65,7 @@ var linevis = {
 
 
   "axes": [
-    {"orient": "bottom", "scale": "x"},
+    {"orient": "bottom", "scale": "x", "grid": true},
     {"orient": "left", "scale": "y", "format": "0.1%", "grid": true}
   ],
 
@@ -130,8 +130,7 @@ var linevis = {
 
 "title": {
    "text":   " Retention Rates ",
-      "subtitle": "Participation trends in " + institution_type_label + " Over All Years",
-   "fontSize": 15,
+      "subtitle": "Participation trends in " + institution_type_label + " Starting from Minimum Value over non-empty and non-outlier years." ,
    "subtitleFontSize": 10
    },
 
@@ -183,13 +182,13 @@ var linevis = {
       {
     "name": "color_labels",
     "type": "ordinal",
-    "domain": current_data.country_names,
+    "domain": {"data": "countrydata", "field": "country_name"},
     "range": {"scheme": "dark2"}
   },
   {
     "name": "color_labels2",
     "type": "ordinal",
-    "domain": current_data.country_names,
+    "domain": {"data": "countrydata", "field": "country_name"},
     "range": {"scheme": "pastel2"}
   }
 ],
@@ -211,7 +210,7 @@ var linevis = {
 
 "axes": [
   
-  {"orient": "bottom", "scale": "x"},
+   {"orient": "bottom", "scale": "x", "grid": true},
 
   {"orient": "left", "scale": "y", "format": "0.1%", "grid": true}
 ],
@@ -264,6 +263,11 @@ var linevis = {
             "strokeOpacity": {"value": 1}
           },
           "hover": {
+         
+              "tooltip": {
+                "signal":
+                          "{'Name': datum.male}",
+              },
             "strokeOpacity": {"value": 0.5},
           }
         },
