@@ -4,24 +4,36 @@
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Retention Rates in Informatics Studies in European Countries</title>
-
+    <title>Retention Rates in Informatics Studies across European Countries</title>
+    <!-- online libs version -->
+<!-- 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      -->
     <!-- Link Bootstrap CSS -->
     <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="container mt-5">
-            <h1>Retention Rates in Informatics Studies in European Countries</h1>
-            <p>Informatics programs are essential for Europe's technological advancement, but student retention rates can limit their impact. This study utilizes a data-driven approach to explore factors affecting retention rates across various European countries. We leverage interactive visualizations built on frameworks like Vega to analyze retention data gathered from national educational statistics, surveys, and institutional reports. This approach provides a dynamic platform for users to explore complex datasets, ultimately enabling a comprehensive picture of retention trends and disparities within European informatics education.</p>
 
-            <br>
-            <p><b>Watch out!</b> Read instructions first.</p>
-            <ul>
-                <li>Select a country to add/remove chart details with <b>shift + click</b>. So you can zoom with the mouse wheel and scroll the map.</li>
-                <li>The countries with 0% retention have no data for the selected year and gender, but they can be selected.</li>
-            </ul>
+
+          <div class="container-fluid">
+            <div class="container">
+              <nav
+                class="navbar"
+              >
+                
+                  <h3 class="me-3">Retention Rates in Informatics Studies across European Countries</h3>
+                  
+              </nav>
+              <p >This study investigates the factors influencing student retention rates within European informatics programs.  This study uses a data-driven approach by introducing interactive visualizations to analyze retention data across diverse European countries. By using national educational statistics, surveys, and institutional reports, we aim to create a comprehensive picture of informatics education retention.</p>
+              <p><b>Watch out!</b> Read instructions first.</p>
+              <ul>
+                  <li>Select a country to add/remove chart details with <b>shift + click</b>. So you can zoom with the mouse wheel and scroll the map.</li>
+                  <li>The countries with 0% retention have no data for the selected year and gender, but they can be selected.</li>
+              </ul>
+            </div>
         </div>
+    <div class="container">
+    
         <div class="row">
             <div class="col">
                 <div class="row">
@@ -64,29 +76,46 @@
             <div class="col">
                 <div class="border" id="vis"></div>
                 <div class="border" id="linevis"></div>
-                <br>
-                <br>
-            </div>
+                            </div>
             <div class="col">
-                <div class="col"></div>
                 <div class="border" id="textvis"></div>
                 <div class="border" id="textvis_genders" hidden></div>
+
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <div class="border" id="lineall"></div>
+            </div>
+            <div class="col">
+                <br>
+                <h5>Research Universities</h5>
+                <p>These institutions primarily focus on academic research alongside teaching. They often offer a wide range of programs, including undergraduate, graduate, and doctoral studies, with an emphasis on theoretical knowledge and research contributions to various fields.</p>
+                <h5>Universities of Applied Sciences</h5>
+                <p>Also known as vocational universities or polytechnics, these institutions provide more practical, skill-oriented education. Programs are designed to prepare students for specific careers, with a strong emphasis on hands-on learning, internships, and industry collaborations.</p>
+
+                </div>
+      
         <br>
-        <h5>Research Universities</h5>
-        <p>These institutions primarily focus on academic research alongside teaching. They often offer a wide range of programs, including undergraduate, graduate, and doctoral studies, with an emphasis on theoretical knowledge and research contributions to various fields.</p>
-        <h5>Universities of Applied Sciences</h5>
-        <p>Also known as vocational universities or polytechnics, these institutions provide more practical, skill-oriented education. Programs are designed to prepare students for specific careers, with a strong emphasis on hands-on learning, internships, and industry collaborations.</p>
+        </div>
+        <div class="row">
+        <div class="col">
+            <br>
         <h5>Incomplete Data and Data Distortion Possibilities</h5>
         <ul>
             <li><strong>Zero Retention Rates:</strong> Countries showing 0% retention rates indicate a lack of available data for the selected year and gender. Despite this, they can still be selected for analysis.</li>
             <li><strong>Data Distortion Possibilities:</strong> It's important to acknowledge the potential for data incompleteness or distortion, which can arise due to various factors such as reporting discrepancies, sampling biases, or methodological limitations. Interpret results with caution, considering the context and potential limitations of the data.</li>
         </ul>
+        </div>
+        </div>
     </div>
 </div>
 <br>
 </body>
+
+<footer class="container-fluid text-center font-weight-bold">
+      <span id="startyear"></span> <span id="year"></span> 📊 dschnurp@students.zcu.cz
+</footer>
 
 <!-- Bootstrap JS -->
 <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -104,5 +133,15 @@
 <script type="text/javascript" src="./static/js/line_chart.js"></script>
 <script type="text/javascript" src="./static/js/ribbon_chart.js"></script>
 <script type="text/javascript" src="./static/js/map.js"></script>
+
+    <!-- online libs version -->
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+ <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3"></script>
+ <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script> -->
 
 </html>

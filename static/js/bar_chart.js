@@ -12,7 +12,7 @@ function show_bar(current_data, current_gender, institution_type_label) {
 
     {
       "$schema": "https://vega.github.io/schema/vega/v5.json",
-      "width": 555,
+      "width": 575,
       "height": 850,
       "padding": 5,
       "autosize": "fit",
@@ -144,7 +144,7 @@ function show_bar(current_data, current_gender, institution_type_label) {
               "align": {"value": "right"},
               "baseline": {"value": "middle"},
              "text": [
-              {"test": current_data.country_names.length + " < '4'", "field": "datum." + current_gender},]
+              {"test": current_data.country_names.length + " < '4'", "field": "datum." + current_gender}]
             }
           }
         }

@@ -1,5 +1,8 @@
 
-
+var start_year = 2024;
+document.getElementById("startyear").innerHTML = start_year;
+if (new Date().getFullYear() - start_year > 0)
+document.getElementById("year").innerHTML = " - " + new Date().getFullYear();
 // default values on init
 var institution_type = document.getElementById("institution_type").value;
 var institution_type_label = "Research Universities";
@@ -8,14 +11,14 @@ var current_countries = ["Czech Republic"];
 var current_data =  { "name": "Czech Republic", "values": structuredClone(retention_data).bachelor[institution_type]["Czech Republic"]};;
 var filtered_data = { "name": "Czech Republic", "values": structuredClone(retention_data).bachelor[institution_type]["Czech Republic"]};
 var current_gender = "female";
-var current_year = 0;
+var current_year =  Math.floor((structuredClone(retention_data).bachelor[institution_type]["Czech Republic"].length - 1) / 2.0);;
 var current_year_label = 0;
 
 var pict_width = 600;
 var pict_height = 500;
 
 document.getElementById("yearsRange").max = structuredClone(retention_data).bachelor[institution_type]["Czech Republic"].length - 1;
-
+document.getElementById("yearsRange").value = Math.floor((structuredClone(retention_data).bachelor[institution_type]["Czech Republic"].length - 1) / 2.0);
 function titleCase(string){
   return string[0].toUpperCase() + string.slice(1).toLowerCase();
 }
@@ -76,7 +79,7 @@ function sortArrayByIndices(array, indices) {
  * - "country_names": an array containing the names of countries that meet the filtering criteria
  * - "values": an array containing the data values that meet the filtering criteria
  */
-function filter_non_outlier_data(gender) {
+function filter_non_outlier_data(gender="male") {
 
   var data_values_filtered = [];
   var data_names_filtered = [];
@@ -88,6 +91,7 @@ function filter_non_outlier_data(gender) {
       retention_data.bachelor[institution_type][current_countries[i]].forEach(item => temp_data.push(item));
 
       temp_data = structuredClone(retention_data.bachelor[institution_type][current_countries[i]]).filter(item => {
+                                              item[gender] = Math.trunc(item[gender] * 1000) / 1000.0
                                                           return item[gender] > 0 && item[gender] < 1
                                                       });
       if (temp_data.length > 0) {
@@ -142,9 +146,9 @@ function update_data() {
   function prepare_data_genders() {
     if (document.getElementById("gender").value !== "male_vs_female") return null;
     // console.log("prepraring data for male vs female comparision");
-
+    var male_data_filtered = filter_non_outlier_data();
     var female_data_filtered = filter_non_outlier_data("female");
-    var male_data_filtered = filter_non_outlier_data("male");
+   
     female_data_filtered["country_names"].concat(male_data_filtered["country_names"]);
     female_data_filtered["values"].concat(male_data_filtered["values"]);
       return female_data_filtered;
@@ -164,8 +168,9 @@ function redraw_charts(current_data) {
   
   var data_genders = prepare_data_genders();
 
-  if (data_genders != null) {
+  var description = "Participation trends in " + institution_type_label +" over all years."
 
+  if (data_genders != null) {
     show_line_genders(data_genders, current_gender, institution_type_label);
     show_bar_genders(data_genders, current_gender, institution_type_label);
 
@@ -175,6 +180,8 @@ function redraw_charts(current_data) {
     // show_ribbon(structuredClone(current_data), current_gender, institution_type_label);
     show_bar(filtered_data, current_gender, institution_type_label);
   }
+
+  show_line(current_data, current_gender, institution_type_label, '#lineall', description);
 
 };
 

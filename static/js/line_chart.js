@@ -1,10 +1,10 @@
 
 
-function show_line(current_data, current_gender, institution_type_label) {
+function show_line(current_data, current_gender, institution_type_label, name_id='#linevis', description= "Trends in " + institution_type_label + " Starting from Minimum Value over non-empty and non-outlier years.") {
 
 var     /*  calculating the minimum value and adds magic 0,01 delta to view min value */
 data_min = (Math.min(...current_data.values.map(item => item[current_gender])) - 0.05).toFixed(1);
-
+ 
 
 var linevis = {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
@@ -17,7 +17,7 @@ var linevis = {
 
  "title": {
      "text":   titleCase(current_gender) + " Retention Rates ",
-        "subtitle": "Participation trends in " + institution_type_label + " Starting from Minimum Value over non-empty and non-outlier years." ,
+        "subtitle":  description ,
      "fontSize": 15,
      "subtitleFontSize": 10
      },
@@ -103,13 +103,13 @@ var linevis = {
 }
 ]
 }
- vegaEmbed('#linevis', linevis);
+ vegaEmbed(name_id, linevis);
  }
 
 
 
 
-function show_line_genders(current_data, current_gender, institution_type_label) {
+function show_line_genders(current_data, current_gender, institution_type_label, name_id='#linevis') {
 
   /*  calculating the minimum value and adds magic 0,01 delta to view min value */
   var  data_min = Math.min( (Math.min(...current_data.values.map(item => item["male"])) - 0.05).toFixed(1),
